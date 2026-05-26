@@ -10,23 +10,118 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     
     <style>
-        body { background-color: #f4f7f6; padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        
+        /* Barra Superior (Header Corporativo) */
+        header {
+            background-color: #ffffff;
+            padding: 15px 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-msg { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: #4a5568; 
+            margin: 0; 
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background-color: #2b6cb0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover { background-color: #1d4ed8; color: white; }
+
+        .logout-btn { 
+            padding: 8px 16px; 
+            background-color: #e53e3e; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .logout-btn:hover { background-color: #c53030; }
+
+        /* Estilos del contenido interno */
         .container-fluid { max-width: 1200px; }
         .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: white; }
         .table-header { background-color: #2c3e50 !important; color: white !important; }
-        .badge-No Atiende { background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.8em; }
-        .badge-n10 { background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.8em; }
+        
+        /* Badges de Estado */
+        .badge-no-atiende { background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.85em; font-weight: 600; }
+        .badge-n10 { background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.85em; font-weight: 600; }
         h2 { color: #2c3e50; font-weight: 700; margin-bottom: 25px; }
+        
+        /* Enlaces de Submenú */
+        .submenu-center a {
+            color: #2b6cb0;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .submenu-center a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <marquee>ATENCIÓN: COMUNICADOS: CINES EN CIERRE -PUNTA LANGOSTA Y EL SALTO  --SICCOB--</marquee>
-<p><center><a href="https://siccob-mex.github.io/zonasiccob"/> ZONA SICCOB || </a>
-<a href="delivery.html"/> DELIVERY || </a>
-<a href="https://mesadeayuda.cinemex.net/HomePage.do?logout=true"/> MESA DE AYUDA || </a>
-<a href="https://siccobsolutions.com.mx/Helpdesk/"/> ADIST || </a>
-<a href="http://10.101.100.52/"/> MONITOR</a></center></p>
-<div class="container-fluid">
+
+<script>
+    // REGLA DE SEGURIDAD: Si intentan entrar directo sin login, los saca
+    if (sessionStorage.getItem('sesionActiva') !== 'true') {
+        window.location.href = "index.html";
+    }
+
+    // REGLA: CIERRE DE SESIÓN SI SE DA UN F5 O RECARGAR PÁGINA
+    if (window.performance && window.performance.getEntriesByType) {
+        const tiposNavegacion = window.performance.getEntriesByType("navigation");
+        if (tiposNavegacion.length > 0 && tiposNavegacion[0].type === "reload") {
+            sessionStorage.removeItem('sesionActiva');
+            sessionStorage.removeItem('nombreUsuario');
+            window.location.href = "index.html";
+        }
+    }
+</script>
+
+<header>
+    <p id="saludoDinamico" class="welcome-msg">Cargando...</p>
+    <div class="header-buttons">
+        <a href="dashboard.html" class="nav-btn">🏠 Menú Principal</a>
+        <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesión 🚪</button>
+    </div>
+</header>
+
+<div class="container-fluid mb-3">
+    <marquee class="fw-bold text-danger mb-2">ATENCIÓN: COMUNICADOS: CINES EN CIERRE -PUNTA LANGOSTA Y EL SALTO  --SICCOB--</marquee>
+    
+    <p class="text-center submenu-center">
+        <a href="https://siccob-mex.github.io/zonasiccob">ZONA SICCOB</a> || 
+        <a href="delivery.html">DELIVERY</a> || 
+        <a href="https://mesadeayuda.cinemex.net/HomePage.do?logout=true">MESA DE AYUDA</a> || 
+        <a href="https://siccobsolutions.com.mx/Helpdesk/">ADIST</a> || 
+        <a href="http://10.101.100.52/">MONITOR</a>
+    </p>
+</div>
+
+<div class="container-fluid mb-5">
     <div class="card p-4">
         <h2 class="text-center">🏢 Consolidado NIVEL-10</h2>
         
@@ -53,7 +148,6 @@
 <script>
     // Datos combinados de ambas imágenes
     const dataset = [
-        // Datos Imagen 1 (No Atiendees)
         [1, "Altavista", "CDMX", "No Atiende", "N10"],
         [2, "Centro Telmex", "CDMX", "No Atiende", "N10"],
         [3, "Ciudad Azteca", "CDMX", "No Atiende", "N10"],
@@ -113,36 +207,37 @@
         [57, "GUAYMAS", "SONORA", "No Atiende", "N10"],
         [58, "LA ISLA CANCUN", "QUINTANA ROO", "No Atiende", "N10"],
         [59, "CANDILES", "QUERÉTARO", "No Atiende", "N10"],
-        [60, "GALERÍAS MAZATLÁN", "SINALOA", "No Atiende", "N10"],
-        
+        [60, "GALERÍAS MAZATLÁN", "SINALOA", "No Atiende", "N10"]
     ];
 
     $(document).ready(function() {
         $('#tablaMaestra').DataTable({
             data: dataset,
             columns: [
-                { title: "#" },
-                { title: "Sucursal" },
-                { title: "Estado" },
+                { data: 0 }, // #
+                { data: 1 }, // Sucursal
+                { data: 2 }, // Estado
                 { 
-                    title: "Tipo de Listado",
+                    data: 3, // Tipo de Listado
                     render: function(data) {
-                        let clase = data === 'General' ? 'badge-General' : 'badge-n10';
+                        let clase = (data === 'No Atiende') ? 'badge-no-atiende' : 'badge-n10';
                         return `<span class="${clase}">${data}</span>`;
                     }
                 },
-                { title: "Asignación" }
+                { data: 4 }  // Asignación
             ],
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
             },
             pageLength: 25,
             responsive: true
         });
-    });
-</script>
 
-<script>
+        // Lanzar funciones globales de control al finalizar la carga
+        generarSaludo();
+        reiniciarTemporizador();
+    });
+
     // =========================================================================
     // LÓGICA DEL SALUDO SEGÚN LA HORA Y NOMBRE
     // =========================================================================
@@ -162,12 +257,6 @@
         const usuario = sessionStorage.getItem('nombreUsuario') || "Usuario";
         document.getElementById('saludoDinamico').innerText = `${saludo}, ${usuario}!`;
     }
-
-    // Ejecutar al cargar la página
-    window.onload = function() {
-        generarSaludo();
-        reiniciarTemporizador();
-    };
 
     // =========================================================================
     // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
@@ -189,14 +278,14 @@
         }, TIEMPO_INACTIVIDAD);
     }
 
-    // Detectores de actividad para reiniciar la hora
+    // Detectores de actividad física
     window.onmousemove = reiniciarTemporizador;
     window.onmousedown = reiniciarTemporizador; 
     window.onclick = reiniciarTemporizador;     
     window.onkeydown = reiniciarTemporizador;   
     window.onscroll = reiniciarTemporizador;    
 
-    // Bloqueo F5 teclado
+    // Bloqueo F5 teclado físico
     window.addEventListener('keydown', function(e) {
         if (e.keyCode === 116 || (e.ctrlKey && e.keyCode === 82) || (e.metaKey && e.keyCode === 82)) {
             e.preventDefault();
