@@ -111,12 +111,7 @@
 </head>
 <body>
 
-    <div class="contenedor-marquesina">
-    <div class="texto-desplazante">
-        * PUNTA LANGOSTA EN CIERRE *
-    </div>
-</div>
-
+  
 <script>
     // REGLA DE SEGURIDAD: Si intentan entrar directo sin login, los saca
     if (sessionStorage.getItem('sesionActiva') !== 'true') {
@@ -138,6 +133,9 @@
     <p id="saludoDinamico" class="welcome-msg">Cargando...</p>
     <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesión 🚪</button>
 </header>
+    <marquee direction="left" behavior="scroll" scrollamount="5">
+    ATENCIÓN
+</marquee>
 
 <div class="main-container">
     <h1>INTRANET SICCOB</h1>
