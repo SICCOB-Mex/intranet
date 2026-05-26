@@ -37,7 +37,8 @@
 <script>
     // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
 
-    if (usuariosAutorizados[emailBase64] === passwordBase64) {
+    // ... (Código anterior del login exitoso) ...
+if (usuariosAutorizados[emailBase64] === passwordBase64) {
     errorDiv.style.display = 'none';
     
     // 1. Guardamos la sesión activa
@@ -48,6 +49,10 @@
     const nombreUsuario = emailIngresado.split('@')[0];
     const nombreFormateado = nombreUsuario.charAt(0).toUpperCase() + nombreUsuario.slice(1);
     sessionStorage.setItem('nombreUsuario', nombreFormateado);
+    
+    window.location.href = "dashboard.html";
+}
+// ... (Resto del código) ...
         
     const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; // 1 hora en milisegundos
     let temporizadorInactividad;
