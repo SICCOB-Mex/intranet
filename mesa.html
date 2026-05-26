@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINES ATENDIDOS POR N10</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    
+    <style>
+        body { background-color: #f4f7f6; padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .container-fluid { max-width: 1200px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: white; }
+        .table-header { background-color: #2c3e50 !important; color: white !important; }
+        .badge-No Atiende { background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.8em; }
+        .badge-n10 { background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.8em; }
+        h2 { color: #2c3e50; font-weight: 700; margin-bottom: 25px; }
+    </style>
+</head>
+<body>
+    <marquee>ATENCIÓN: COMUNICADOS: CINES EN CIERRE -PUNTA LANGOSTA Y EL SALTO  --SICCOB--</marquee>
+<p><center><a href="https://siccob-mex.github.io/zonasiccob"/> ZONA SICCOB || </a>
+<a href="delivery.html"/> DELIVERY || </a>
+<a href="https://mesadeayuda.cinemex.net/HomePage.do?logout=true"/> MESA DE AYUDA || </a>
+<a href="https://siccobsolutions.com.mx/Helpdesk/"/> ADIST || </a>
+<a href="http://10.101.100.52/"/> MONITOR</a></center></p>
+<div class="container-fluid">
+    <div class="card p-4">
+        <h2 class="text-center">🏢 Consolidado NIVEL-10</h2>
+        
+        <table id="tablaMaestra" class="table table-hover w-100">
+            <thead class="table-header">
+                <tr>
+                    <th>#</th>
+                    <th>Sucursal</th>
+                    <th>Estado</th>
+                    <th>Tipo de Listado</th>
+                    <th>Asignación</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    // Datos combinados de ambas imágenes
+    const dataset = [
+        // Datos Imagen 1 (No Atiendees)
+        [1, "Altavista", "CDMX", "No Atiende", "N10"],
+        [2, "Centro Telmex", "CDMX", "No Atiende", "N10"],
+        [3, "Ciudad Azteca", "CDMX", "No Atiende", "N10"],
+        [4, "Claveria", "CDMX", "No Atiende", "N10"],
+        [5, "Cuauhtemoc", "CDMX", "No Atiende", "N10"],
+        [6, "Ferreria La villa", "CDMX", "No Atiende", "N10"],
+        [7, "Insurgentes", "CDMX", "No Atiende", "N10"],
+        [8, "Jardines Tultitlan", "Edo Mex.", "No Atiende", "N10"],
+        [9, "La Joya", "CDMX", "No Atiende", "N10"],
+        [10, "Paseo hipodromo", "CDMX", "No Atiende", "N10"],
+        [11, "Portal Centro", "CDMX", "No Atiende", "N10"],
+        [12, "Portal Vallejo", "CDMX", "No Atiende", "N10"],
+        [13, "Real", "CDMX", "No Atiende", "N10"],
+        [14, "Rosario", "CDMX", "No Atiende", "N10"],
+        [15, "San Esteban", "Edo. Mex", "No Atiende", "N10"],
+        [16, "San Mateo", "Edo. Mex", "No Atiende", "N10"],
+        [17, "Tenayuca", "CDMX", "No Atiende", "N10"],
+        [18, "Cuautla", "Morelos", "No Atiende", "N10"],
+        [19, "Forum Cuernavaca", "Morelos", "No Atiende", "N10"],
+        [20, "Plaza Bugambilia", "Morelos", "No Atiende", "N10"],
+        [21, "Alboa Plaza Bugambilia", "Morelos", "No Atiende", "N10"],
+        [22, "Cibeles", "Morelos", "No Atiende", "N10"],
+        [23, "Forum Tepic", "Nayarit", "No Atiende", "N10"],
+        [24, "Puerto Paraiso", "Baja California Sur", "No Atiende", "N10"],
+        [25, "Durango", "Durango", "No Atiende", "N10"],
+        [26, "Galerias Mazatlan Platino", "SINALOA", "No Atiende", "N10"],
+        [27, "Mundo E", "CDMX", "No Atiende", "N10"],
+        [28, "Mundo E platino", "CDMX", "No Atiende", "N10"],
+        [29, "Alboa Mundo E", "CDMX", "No Atiende", "N10"],
+        [30, "Arena Mundo E", "CDMX", "No Atiende", "N10"],     
+        [31, "AGUASCALIENTES", "AGUASCALIENTES", "No Atiende", "N10"],
+        [32, "LA GRAN VÍA MEXICALI", "BAJA CALIFORNIA", "No Atiende", "N10"],
+        [33, "PUERTO PARAISO PLATINO", "BAJA CALIFORNIA SUR", "No Atiende", "N10"],
+        [34, "CD DEL CARMEN", "CAMPECHE", "No Atiende", "N10"],
+        [35, "GALERIAS TUXTLA", "CHIAPAS", "No Atiende", "N10"],
+        [36, "GALERIAS TEC", "CHIHUAHUA", "No Atiende", "N10"],
+        [37, "LA VIGA", "CIUDAD DE MÉXICO", "No Atiende", "N10"],
+        [38, "SAN ANTONIO", "CIUDAD DE MÉXICO", "No Atiende", "N10"],
+        [39, "PLAZA INOVA PIEDRAS NEGRAS", "COAHUILA DE ZARAGOZA", "No Atiende", "N10"],
+        [40, "DURANGO PLATINO", "DURANGO", "No Atiende", "N10"],
+        [41, "SANTIN (TOLUCA II)", "ESTADO DE MÉXICO", "No Atiende", "N10"],
+        [42, "SAN MIGUEL ALLENDE", "GUANAJUATO", "No Atiende", "N10"],
+        [43, "TULANCINGO", "HIDALGO", "No Atiende", "N10"],
+        [44, "SAN GASPAR", "JALISCO", "No Atiende", "N10"],
+        [45, "LÁZARO CÁRDENAS", "MICHOACÁN DE OCAMPO", "No Atiende", "N10"],
+        [46, "PLAZA BUGAMBILIA PLATINO", "MORELOS", "No Atiende", "N10"],
+        [47, "FORUM TEPIC PLATINO", "NAYARIT", "No Atiende", "N10"],
+        [48, "PABELLÓN M", "NUEVO LEÓN", "No Atiende", "N10"],
+        [49, "SALINAS CRUZ", "OAXACA", "No Atiende", "N10"],
+        [50, "PUEBLA TRIÁNGULO LAS ÁNIMAS", "PUEBLA", "No Atiende", "N10"],
+        [51, "CORDOBA", "VERACRUZ", "No Atiende", "N10"],
+        [52, "CITADELLA", "SAN LUIS POTOSÍ", "No Atiende", "N10"],
+        [53, "RIO GRANDE", "ZACATECAS", "No Atiende", "N10"],
+        [54, "MACROPLAZA MÉRIDA", "YUCATÁN", "No Atiende", "N10"],
+        [55, "TAMPICO", "TAMAULIPAS", "No Atiende", "N10"],
+        [56, "CITY CENTER VILLAHERMOSA", "TABASCO", "No Atiende", "N10"],
+        [57, "GUAYMAS", "SONORA", "No Atiende", "N10"],
+        [58, "LA ISLA CANCUN", "QUINTANA ROO", "No Atiende", "N10"],
+        [59, "CANDILES", "QUERÉTARO", "No Atiende", "N10"],
+        [60, "GALERÍAS MAZATLÁN", "SINALOA", "No Atiende", "N10"],
+        
+    ];
+
+    $(document).ready(function() {
+        $('#tablaMaestra').DataTable({
+            data: dataset,
+            columns: [
+                { title: "#" },
+                { title: "Sucursal" },
+                { title: "Estado" },
+                { 
+                    title: "Tipo de Listado",
+                    render: function(data) {
+                        let clase = data === 'General' ? 'badge-General' : 'badge-n10';
+                        return `<span class="${clase}">${data}</span>`;
+                    }
+                },
+                { title: "Asignación" }
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            },
+            pageLength: 25,
+            responsive: true
+        });
+    });
+</script>
+
+<script>
+    // =========================================================================
+    // LÓGICA DEL SALUDO SEGÚN LA HORA Y NOMBRE
+    // =========================================================================
+    function generarSaludo() {
+        const fecha = new Date();
+        const hora = fecha.getHours();
+        let saludo = "";
+
+        if (hora >= 6 && hora < 12) {
+            saludo = "☀️ ¡Buen día";
+        } else if (hora >= 12 && hora < 19) {
+            saludo = "⛅ ¡Buena tarde";
+        } else {
+            saludo = "🌙 ¡Buena noche";
+        }
+
+        const usuario = sessionStorage.getItem('nombreUsuario') || "Usuario";
+        document.getElementById('saludoDinamico').innerText = `${saludo}, ${usuario}!`;
+    }
+
+    // Ejecutar al cargar la página
+    window.onload = function() {
+        generarSaludo();
+        reiniciarTemporizador();
+    };
+
+    // =========================================================================
+    // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
+    // =========================================================================
+    const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; 
+    let temporizadorInactividad;
+
+    function cerrarSesion() {
+        alert("Tu sesión ha finalizado.");
+        sessionStorage.removeItem('sesionActiva');
+        sessionStorage.removeItem('nombreUsuario');
+        window.location.href = "index.html"; 
+    }
+
+    function reiniciarTemporizador() {
+        clearTimeout(temporizadorInactividad);
+        temporizadorInactividad = setTimeout(() => {
+            cerrarSesion();
+        }, TIEMPO_INACTIVIDAD);
+    }
+
+    // Detectores de actividad para reiniciar la hora
+    window.onmousemove = reiniciarTemporizador;
+    window.onmousedown = reiniciarTemporizador; 
+    window.onclick = reiniciarTemporizador;     
+    window.onkeydown = reiniciarTemporizador;   
+    window.onscroll = reiniciarTemporizador;    
+
+    // Bloqueo F5 teclado
+    window.addEventListener('keydown', function(e) {
+        if (e.keyCode === 116 || (e.ctrlKey && e.keyCode === 82) || (e.metaKey && e.keyCode === 82)) {
+            e.preventDefault();
+            cerrarSesion();
+        }
+    });
+</script>
+
+</body>
+</html>
