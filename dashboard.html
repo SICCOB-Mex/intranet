@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Interno - SICCOB</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background-color: #f8f9fa; margin: 0; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); max-width: 600px; margin: auto; }
+        h1 { color: #2c3e50; }
+        button { padding: 10px 15px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<script>
+    // REGLA DE SEGURIDAD LOCAL: Si no pasaron por el login, los bota inmediatamente
+    if (sessionStorage.getItem('sesionActiva') !== 'true') {
+        window.location.href = "index.html";
+    }
+
+    // REGLA: CIERRE DE SESIÓN SI DAN F5 / RECARGAR
+    if (window.performance && window.performance.getEntriesByType) {
+        const tiposNavegacion = window.performance.getEntriesByType("navigation");
+        if (tiposNavegacion.length > 0 && tiposNavegacion[0].type === "reload") {
+            sessionStorage.removeItem('sesionActiva'); // Destruye la sesión
+            window.location.href = "index.html"; // Expulsa
+        }
+    }
+</script>
+
+<div class="container">
+    <h1>¡Bienvenido al sistema interno de SICCOB!</h1>
+    <p>Esta página contiene información confidencial exclusiva para los 10 usuarios de la lista blanca.</p>
+    <hr>
+    <p>Tu sesión expirará si dejas de registrar actividad por 1 hora completa.</p>
+    <br>
+    <button onclick="cerrarSesion()">Cerrar Sesión Manualmente</button>
+</div>
+
+<script>
+    // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
+    const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; // 1 hora en milisegundos
+    let temporizadorInactividad;
+
+    function cerrarSesion() {
+        alert("Tu sesión ha finalizado.");
+        sessionStorage.removeItem('sesionActiva');
+        window.location.href = "index.html"; 
+    }
+
+    // Si hay actividad, se suspende el conteo y vuelve a empezar la hora desde cero
+    function reiniciarTemporizador() {
+        clearTimeout(temporizadorInactividad);
+        temporizadorInactividad = setTimeout(() => {
+            cerrarSesion();
+        }, TIEMPO_INACTIVIDAD);
+    }
+
+    // Detectores de actividad del usuario
+    window.onload = reiniciarTemporizador;
+    window.onmousemove = reiniciarTemporizador;
+    window.onmousedown = reiniciarTemporizador; 
+    window.onclick = reiniciarTemporizador;     
+    window.onkeydown = reiniciarTemporizador;   
+    window.onscroll = reiniciarTemporizador;    
+
+    // Bloqueo extra por si presionan la tecla física F5 o comandos de recarga
+    window.addEventListener('keydown', function(e) {
+        if (e.keyCode === 116 || (e.ctrlKey && e.keyCode === 82) || (e.metaKey && e.keyCode === 82)) {
+            e.preventDefault();
+            cerrarSesion();
+        }
+    });
+</script>
+
+</body>
+</html>

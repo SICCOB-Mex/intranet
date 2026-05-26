@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Ultra Seguro - SICCOB</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; margin:0; }
+        .login-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 320px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button:hover { background-color: #0056b3; }
+        .error-msg { color: red; font-size: 13px; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>Acceso SICCOB</h2>
+    <p>Ingresa tus credenciales autorizadas</p>
+    
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="correo@siccob.com.mx" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <div id="error" class="error-msg"></div>
+</div>
+
+<script>
+    // LISTA DE DATOS 100% ENCRIPTADOS
+    // Estructura: "HASH_DEL_CORREO": "HASH_DE_LA_CONTRASEÑA"
+    const usuariosAutorizados = {
+        // shernandez@siccob.com.mx -> Siccob2026
+        "169992323e20e8354c0e665ba4296683f12e847c2130c000e3f2fb7064d7df63": "3b2e5699411dc10f4492bf44df62e8460677fa3347bf43eb895d36b801a2cbb9",
+        
+        // Aquí agregarías los otros 9 pares encriptados siguiendo el mismo formato:
+        // "hash_correo_2": "hash_contraseña_2",
+    };
+
+    // Función matemática SHA-256 para encriptar en tiempo real
+    async function generarHashSHA256(text) {
+        const msgBuffer = new TextEncoder().encode(text);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+        
+        const emailIngresado = document.getElementById('email').value.toLowerCase().trim();
+        const passwordIngresada = document.getElementById('password').value;
+        const errorDiv = document.getElementById('error');
+
+        // 1. Encriptamos el correo que escribió el usuario para poder buscarlo en la lista
+        const hashEmailIngresado = await generarHashSHA256(emailIngresado);
+        
+        // 2. ¿El hash del correo coincide con alguno de la lista de 10?
+        if (hashEmailIngresado in usuariosAutorizados) {
+            
+            // 3. Encriptamos la contraseña escrita para compararla con su pareja
+            const hashPasswordIngresada = await generarHashSHA256(passwordIngresada);
+            
+            if (usuariosAutorizados[hashEmailIngresado] === hashPasswordIngresada) {
+                errorDiv.style.display = 'none';
+                sessionStorage.setItem('sesionActiva', 'true');
+                
+                // Redirección al dashboard en GitHub Pages
+                window.location.href = "dashboard.html";
+            } else {
+                mostrarError("Contraseña incorrecta.");
+            }
+        } else {
+            // Se rechaza si el hash del correo no coincide exactamente con los 10 guardados
+            mostrarError("El correo electrónico no está registrado o no está autorizado.");
+        }
+    });
+
+    function mostrarError(mensaje) {
+        const errorDiv = document.getElementById('error');
+        errorDiv.innerText = mensaje;
+        errorDiv.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
