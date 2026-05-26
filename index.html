@@ -56,12 +56,11 @@
     // =========================================================================
     const usuariosAutorizados = {
         "c2hlcm5hbmRlekBzaWNjb2IuY29tLm14": "U2ljY29iMjAyNg==",
-        "anZhenF1ZXpAc2ljY29iLmNvbS5teA==": "anZhenF1ZXoyMDI2", // @siccob.com.mx -> 2026
-        // Agrega aquí tus otros 9 usuarios mapeados...
+        "anZhenF1ZXpAc2ljY29iLmNvbS5teA==": "anZhenF1ZXoyMDI2", //        
     };
 
     // =========================================================================
-    // LÓGICA PARA MOSTRAR / OCULTAR CONTRASEÑA
+
     // =========================================================================
     const passwordInput = document.getElementById('password');
     const togglePasswordButton = document.getElementById('togglePassword');
@@ -69,16 +68,16 @@
     togglePasswordButton.addEventListener('click', function () {
         // Revisamos el tipo actual de la casilla
         if (passwordInput.type === 'password') {
-            passwordInput.type = 'text'; // Muestra la contraseña
-            togglePasswordButton.textContent = '🙈'; // Cambia el icono a monito tapándose los ojos
+            passwordInput.type = 'text'; 
+            togglePasswordButton.textContent = '🙈'; 
         } else {
-            passwordInput.type = 'password'; // Oculta la contraseña
-            togglePasswordButton.textContent = '👁️'; // Regresa al icono del ojo
+            passwordInput.type = 'password'; 
+            togglePasswordButton.textContent = '👁️'; 
         }
     });
 
     // =========================================================================
-    // PROCESO DE INICIO DE SESIÓN
+    // 
     // =========================================================================
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault(); 
