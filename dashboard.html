@@ -33,8 +33,22 @@
     <button onclick="cerrarSesion()">Cerrar Sesión Manualmente</button>
 </div>
 
+
 <script>
     // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
+
+    if (usuariosAutorizados[emailBase64] === passwordBase64) {
+    errorDiv.style.display = 'none';
+    
+    // 1. Guardamos la sesión activa
+    sessionStorage.setItem('sesionActiva', 'true');
+    
+    // 2. NUEVO: Extraemos el nombre del correo (ej: "shernandez" de shernandez@siccob.com.mx)
+    // y lo guardamos limpio capitalizando la primera letra
+    const nombreUsuario = emailIngresado.split('@')[0];
+    const nombreFormateado = nombreUsuario.charAt(0).toUpperCase() + nombreUsuario.slice(1);
+    sessionStorage.setItem('nombreUsuario', nombreFormateado);
+        
     const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; // 1 hora en milisegundos
     let temporizadorInactividad;
 
