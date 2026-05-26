@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SICCOB</title>
+    <title>Login Corporativo - SICCOB</title>
     <style>
         body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; margin:0; }
         .login-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 320px; text-align: center; }
         input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        button:hover { background-color: #0056b3; }
+        
+        /* Contenedor especial para la contraseña y el botón de ver */
+        .password-container { position: relative; width: 100%; }
+        .password-container input { padding-right: 40px; } /* Espacio para que el texto no tape el botón */
+        
+        .toggle-btn { 
+            position: absolute; 
+            right: 10px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 14px; 
+            color: #555;
+            padding: 5px;
+        }
+
+        button[type="submit"] { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+        button[type="submit"]:hover { background-color: #0056b3; }
         .error-msg { color: red; font-size: 13px; margin-top: 10px; display: none; }
     </style>
 </head>
@@ -17,11 +35,16 @@
 
 <div class="login-card">
     <h2>Acceso SICCOB</h2>
-    <p>Ingresa tus credenciales/p>
+    <p>Ingresa tus credenciales autorizadas</p>
     
     <form id="loginForm">
         <input type="email" id="email" placeholder="correo@siccob.com.mx" required>
-        <input type="password" id="password" placeholder="Contraseña" required>
+        
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="button" id="togglePassword" class="toggle-btn">👁️</button>
+        </div>
+
         <button type="submit">Iniciar Sesión</button>
     </form>
     <div id="error" class="error-msg"></div>
@@ -29,17 +52,33 @@
 
 <script>
     // =========================================================================
-    // LISTA DE DATOS CODIFICADOS EN BASE64 (Escondidos para el usuario común)
+    // LISTA DE DATOS CODIFICADOS EN BASE64
     // =========================================================================
-    // Estructura: "CORREO_EN_BASE64": "CONTRASEÑA_EN_BASE64"
     const usuariosAutorizados = {
-        // shernandez@siccob.com.mx -> Siccob2026
-        "c2hlcm5hbmRlekBzaWNjb2IuY29tLm14": "U2ljY29iMjAyNg==",
-        
-        // Aquí abajo te dejo espacio para que agregues los otros 9 usuarios.
-        // Solo debes convertirlos a Base64 y pegarlos siguiendo el mismo orden.
+        "c2hlcm5hbmRlekBzaWNjb2IuY29tLm14": "U2ljY29iMjAyNg==", // shernandez@siccob.com.mx -> Siccob2026
+        // Agrega aquí tus otros 9 usuarios mapeados...
     };
 
+    // =========================================================================
+    // LÓGICA PARA MOSTRAR / OCULTAR CONTRASEÑA
+    // =========================================================================
+    const passwordInput = document.getElementById('password');
+    const togglePasswordButton = document.getElementById('togglePassword');
+
+    togglePasswordButton.addEventListener('click', function () {
+        // Revisamos el tipo actual de la casilla
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text'; // Muestra la contraseña
+            togglePasswordButton.textContent = '🙈'; // Cambia el icono a monito tapándose los ojos
+        } else {
+            passwordInput.type = 'password'; // Oculta la contraseña
+            togglePasswordButton.textContent = '👁️'; // Regresa al icono del ojo
+        }
+    });
+
+    // =========================================================================
+    // PROCESO DE INICIO DE SESIÓN
+    // =========================================================================
     document.getElementById('loginForm').addEventListener('submit', function(e) {
         e.preventDefault(); 
         
@@ -47,27 +86,18 @@
         const passwordIngresada = document.getElementById('password').value;
         const errorDiv = document.getElementById('error');
 
-        // Convertimos las entradas del usuario a Base64 de forma nativa e instantánea
         const emailBase64 = btoa(emailIngresado);
         const passwordBase64 = btoa(passwordIngresada);
         
-        // 1. REGLA ESTRICTA: ¿El correo existe en nuestra lista?
         if (emailBase64 in usuariosAutorizados) {
-            
-            // 2. ¿La contraseña coincide?
             if (usuariosAutorizados[emailBase64] === passwordBase64) {
                 errorDiv.style.display = 'none';
-                
-                // Concedemos el token de acceso
                 sessionStorage.setItem('sesionActiva', 'true');
-                
-                // Redirigimos al archivo hermano en GitHub Pages
                 window.location.href = "dashboard.html";
             } else {
                 mostrarError("Contraseña incorrecta.");
             }
         } else {
-            // Rechaza si el correo no está exactamente en la lista
             mostrarError("El correo electrónico no está registrado o no está autorizado.");
         }
     });
