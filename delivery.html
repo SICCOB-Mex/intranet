@@ -10,19 +10,99 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     
     <style>
-        body { background-color: #f4f7f6; padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        
+        /* Barra Superior (Header Corporativo) */
+        header {
+            background-color: #ffffff;
+            padding: 15px 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-msg { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: #4a5568; 
+            margin: 0; 
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background-color: #2b6cb0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover { background-color: #1d4ed8; color: white; }
+
+        .logout-btn { 
+            padding: 8px 16px; 
+            background-color: #e53e3e; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .logout-btn:hover { background-color: #c53030; }
+
+        /* Contenedor de la Tabla */
         .container-fluid { max-width: 1200px; }
         .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: white; }
         .table-header { background-color: #2c3e50 !important; color: white !important; }
-        .badge-No Atiende { background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.8em; }
-        .badge-n10 { background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.8em; }
+        
+        /* Badges de Empresas */
+        .badge-siccob { background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.85em; font-weight: 600; }
+        .badge-n10 { background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 8px; font-size: 0.85em; font-weight: 600; }
         h2 { color: #2c3e50; font-weight: 700; margin-bottom: 25px; }
     </style>
 </head>
 <body>
-<div class="container-fluid">
+
+<script>
+    // REGLA DE SEGURIDAD: Si intentan entrar directo sin login, los saca
+    if (sessionStorage.getItem('sesionActiva') !== 'true') {
+        window.location.href = "index.html";
+    }
+
+    // REGLA: CIERRE DE SESIÓN SI SE DA UN F5 O RECARGAR PÁGINA
+    if (window.performance && window.performance.getEntriesByType) {
+        const tiposNavegacion = window.performance.getEntriesByType("navigation");
+        if (tiposNavegacion.length > 0 && tiposNavegacion[0].type === "reload") {
+            sessionStorage.removeItem('sesionActiva');
+            sessionStorage.removeItem('nombreUsuario');
+            window.location.href = "index.html";
+        }
+    }
+</script>
+
+<header>
+    <p id="saludoDinamico" class="welcome-msg">Cargando...</p>
+    <div class="header-buttons">
+        <a href="dashboard.html" class="nav-btn">🏠 Menú Principal</a>
+        <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesión 🚪</button>
+    </div>
+</header>
+
+<div class="container-fluid mb-5">
     <div class="card p-4">
-        <h2 class="text-center">EQUIPOS DELIVERY</h2>
+        <h2 class="text-center">EQUIPOS DELIVERY 📦</h2>
         
         <table id="tablaMaestra" class="table table-hover w-100">
             <thead class="table-header">
@@ -45,259 +125,266 @@
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-    // Datos combinados de ambas imágenes
+    // Base de datos de Equipos Delivery
     const dataset = [
-
-  [1, "Aguascalientes", "10.100.179.109", "AGSDUL05", "N10"],
-  [2, "Alaia Tapachula", "10.100.155.112", "PJXDUL01", "SICCOB"],
-  [3, "Altabrisa P", "10.100.10.169", "VLTAQ05", "SICCOB"],
-  [4, "Altabrisa R", "10.100.10.169", "VALTAQ05", "SICCOB"],
-  [5, "Altavista", "10.100.96.110", "ALTDUL01", "N10"],
-  [6, "Amalucan", "10.101.97.146", "AMADUL07", "SICCOB"],
-  [7, "Ambar Capital R", "10.101.84.109", "AMCDUL11", "SICCOB"],
-  [8, "Andador Morelia", "10.100.33.119", "AMODUL09", "SICCOB"],
-  [9, "Andamar P", "10.100.181.121", "ANPTAQ01", "SICCOB"],
-  [10, "Antara P", "10.100.165.122", "PANBAR01", "SICCOB"],
-  [11, "Arenal", "10.100.54.117", "AREDUL07", "SICCOB"],
-  [12, "Artz Pedregal P", "10.101.83.118", "APZCAI03", "SICCOB"],
-  [13, "Atana Lindavista", "10.101.98.109", "ATIDUL01", "SICCOB"],
-  [14, "Atlacomulco", "10.100.182.118", "ATLDUL10", "SICCOB"],
-  [15, "Boulevares Queretaro", "10100184108", "QRODUL06", "SICCOB"],
-  [16, "Candiles", "10.100.173.118", "CANDUL05", "N10"],
-  [17, "Canek", "10100187119", "CNKDUL10", "SICCOB"],
-  [18, "Carso Tlalnepantla", "10.100.8.129", "PTADUL02", "SICCOB"],
-  [19, "Cd Azteca", "10100188115", "AZTDUL01", "N10"],
-  [20, "Cd Valles", "10.100.192.115", "CDVDUL02", "SICCOB"],
-  [21, "Centrika", "10100194117", "CTKDUL02", "SICCOB"],
-  [22, "Centro Telmex", "10.100.103.113", "CTXDUL05", "N10"],
-  [23, "Chalco 196", "10100196106", "CHADUL07", "SICCOB"],
-  [24, "Chetumal", "10.100.197.109", "CHEDUL02", "SICCOB"],
-  [25, "Cibeles", "10100112103", "CCIDUL08", "N10"],
-  [26, "Citadella R", "10.100.199.109", "CDADUL03", "N10"],
-  [27, "City Center Villahermosa", "10.100.132.109", "CCVDUL02", "N10"],
-  [28, "Ciudad Del Carmen", "10.100.189.101", "CDCDUL05", "N10"],
-  [29, "Claveria", "10100201118", "VEADUL01", "N10"],
-  [30, "Coacalco", "10.100.202.114", "CCODUL01", "SICCOB"],
-  [31, "Coapa", "10.100.35.148", "COADUL01", "SICCOB"],
-  [32, "Constituyentes", "10.100.178.102", "CTYDUL02", "SICCOB"],
-  [33, "Cortijo", "10100207103", "COTDUL01", "SICCOB"],
-  [34, "Crystal Villahermosa", "10.100.123.41", "CVLDUL02", "SICCOB"],
-  [35, "Cuatro Caminos", "10.100.49.135", "CCCLOC01", "SICCOB"],
-  [36, "Cuatro Rios", "10.101.65.101", "CCRACC01", "SICCOB"],
-  [37, "Cuauhtemoc", "10100105126", "CUADUL06", "N10"],
-  [38, "Cuautitlan Ii", "10.100.21.107", "CUTDUL09", "SICCOB"],
-  [39, "Cuautla", "10100177108", "CUUDUL01", "N10"],
-  [40, "Cuicuilco R", "10.100.148.105", "CUIDUL07", "SICCOB"],
-  [41, "Distrito Uno R", "10.100.75.116", "DIUDUL08", "SICCOB"],
-  [42, "Durango R", "10.100.211.122", "DGODUL01", "N10"],
-  [43, "Duraznos", "10100137117", "DUPBAR01", "SICCOB"],
-  [44, "Ecatepec", "10.100.145.114", "ECADUL05", "SICCOB"],
-  [45, "El Paseo", "10.100.86.117", "EPAACC01", "SICCOB"],
-  [46, "Encinas", "10.100.213.105", "ENCDUL02", "SICCOB"],
-  [47, "Explanada Culiacan", "10.101.96.65", "EXCDUL12", "SICCOB"],
-  [48, "Explanada Pachuca", "10.100.133.115", "EPCDUL01", "SICCOB"],
-  [49, "Explanada Puebla", "10100115124", "EPUDUL01", "SICCOB"],
-  [50, "Fashion Drive P", "10.100.51.114", "FDPTAQ01", "SICCOB"],
-  [51, "Felix Cuevas P", "10.100.36.110", "FIXDUL01", "SICCOB"],
-  [52, "Ferreria", "10.100.72.111", "FERLOC01", "N10"],
-  [53, "Fiesta Anahuac", "10100101112", "ANADUL08", "SICCOB"],
-  [54, "Forum Coatzacoalcos R", "10.100.216.119", "CTZDUL01", "SICCOB"],
-  [55, "Forum Cuernavaca", "10.100.52.135", "FCNDUL02", "N10"],
-  [56, "Forum Culiacan R", "10.100.217.122", "FORDUL08", "SICCOB"],
-  [57, "Forum Tepic R", "10100218142", "FTEDUL07", "N10"],
-  [58, "Fuentes Mares", "10.100.91.100", "MARDUL03", "SICCOB"],
-  [59, "Galerias", "10100147116", "GALDUL01", "SICCOB"],
-  [60, "Galerias Mazatlan R", "10.100.220.109", "GAZDUL07", "N10"],
-  [61, "Galerias Merida R", "10100221133", "GMEDUL03", "SICCOB"],
-  [62, "Galerias Saltillo R", "10.100.222.159", "GSTDUL02", "SICCOB"],
-  [63, "Galerias Tec", "10.100.169.109", "TECDUL01", "N10"],
-  [64, "Galerías Tlaxcala", "10.100.58.121", "TLXACC02", "SICCOB"],
-  [65, "Galerias Tuxtla", "10.100.223.109", "XTADUL01", "N10"],
-  [66, "Garza Sada", "10.100.66.113", "GARDUL02", "SICCOB"],
-  [67, "Gomez Palacio", "10100224119", "GPADUL02", "SICCOB"],
-  [68, "Gran Patio Pachuca", "10.100.225.109", "GPPTAQ01", "SICCOB"],
-  [69, "Gran Sur", "10.100.95.129", "GSUDUL01", "SICCOB"],
-  [70, "Guadalajara", "10.100.144.117", "GUADUL02", "SICCOB"],
-  [71, "Guaymas", "10.100.229.109", "GYMDUL01", "N10"],
-  [72, "Hermanos Serdan", "10.100.231.116", "HESACC02", "SICCOB"],
-  [73, "Heroes Cancun", "10.100.11.109", "HERTAQ04", "SICCOB"],
-  [74, "Hilvana", "10.100.63.109", "HIVDUL01", "SICCOB"],
-  [75, "Hollywood Chihuahua R", "10100232110", "WODDUL01", "SICCOB"],
-  [76, "Humberto Lobo", "10.100.233.113", "HLODUL03", "SICCOB"],
-  [77, "Insurgentes", "10100154108", "INSDUL07", "N10"],
-  [78, "Intermall R", "10.100.22.120", "ILLDUL02", "SICCOB"],
-  [79, "Irapuato", "10100234119", "ATODUL01", "SICCOB"],
-  [80, "Itzaes", "10.101.91.109", "ITZTDU04", "SICCOB"],
-  [81, "Izcalli", "10100161104", "IZCDUL02", "SICCOB"],
-  [82, "Iztapalapa", "10.100.107.129", "IZTDUL12", "SICCOB"],
-  [83, "Jurica", "10.100.30.111", "JURDUL07", "SICCOB"],
-  [84, "Juventud", "10.100.235.101", "JUVDUL05", "SICCOB"],
-  [85, "La Gran Via Mexicali", "10.100.38.123", "XICDUL07", "N10"],
-  [86, "La isla P", "10.100.79.128", "ISPTAQ03", "N10"],
-  [87, "La Joya", "10100236108", "LJYDUL06", "N10"],
-  [88, "La Via", "10.100.241.100", "VIALOC01", "SICCOB"],
-  [89, "La Viga", "10.100.174124", "LVIDUL01", "N10"],
-  [90, "Libramiento", "10.101.86.120", "MPLTDU07", "SICCOB"],
-  [91, "Lincoln", "10.100.48.103", "LINTAQ02", "SICCOB"],
-  [92, "Lindavista", "10.100.247.108", "LDVDUL08", "SICCOB"],
-  [93, "Loma Bonita", "10100248122", "LBODUL04", "SICCOB"],
-  [94, "Lomas Estrella", "10.100.26.121", "ESTDUL10", "SICCOB"],
-  [95, "Lomas Verdes", "10100166134", "VERDUL01", "SICCOB"],
-  [96, "Loreto", "10.100.97.108", "LORDUL08", "SICCOB"],
-  [97, "Los Reyes", "10.100.136.101", "LREDUL01", "SICCOB"],
-  [98, "Macroplaza Merida", "10.100.251.109", "MCMDUL05", "N10"],
-  [99, "Macroplaza Oaxaca", "10100252112", "OXDDUL02", "SICCOB"],
-  [100, "Macroplaza Tijuana", "10.100.253.129", "TIJDUL15", "SICCOB"],
-  [101, "Macroplaza Vallarta", "10100254111", "MVLDUL09", "SICCOB"],
-  [102, "Manacar", "10.100.56.124", "MANDUL10", "SICCOB"],
-  [103, "Martin Carrera", "10.100.135.111", "PMCDUL01", "SICCOB"],
-  [104, "Matamoros", "10.101.2.110", "MATDUL02", "SICCOB"],
-  [105, "Metepec Plaza La Pilita", "10100238112", "PILDUL05", "SICCOB"],
-  [106, "Metro Centro Hermosillo", "10.101.3.104", "HCMDUL01", "SICCOB"],
-  [107, "Mexiquense", "10.100.5.103", "MXQDUL04", "SICCOB"],
-  [108, "Mi Plaza Los Cabos", "10.100.44.116", "CAEDUL01", "SICCOB"],
-  [109, "Miguel Angel De Quevedo", "10100111144", "MAQDUL08", "SICCOB"],
-  [110, "Mirador Hermosillo", "10.101.6.101", "HSLDUL01", "SICCOB"],
-  [111, "Mirasierra", "10.100.17.110", "MSRDUL02", "SICCOB"],
-  [112, "Mol Concordia", "10.100.80.8", "APODUL05", "SICCOB"],
-  [113, "Monclova", "10.101.7.106", "MONDUL02", "SICCOB"],
-  [114, "Morelia Ii", "10.101.8.111", "MIIDUL08", "SICCOB"],
-  [115, "Multiplaza Cancun", "10.101.9.117", "MCUDUL08", "SICCOB"],
-  [116, "Mundo Divertido Tijuana", "10.101.11.102", "TJNDUL07", "SICCOB"],
-  [117, "Mundo E", "10.100.153.109", "MUEDUL02", "N10"],
-  [118, "Navojoa", "10.101.13.107", "NAVDUL08", "SICCOB"],
-  [119, "Downtown Puebla", "10100134124", "VELLUX", "SICCOB"],
-  [120, "Martin Carrera", "10.100.135.114", "PMCDUL11", "SICCOB"],
-  [121, "Downtown Puebla P", "10100134113", "DPPTAQ01", "SICCOB"],
-  [122, "Paseo San Pedro", "10.100.141.60", "PSPCAI01", "SICCOB"],
-  [123, "Nuevo Veracruz", "10.101.14.114", "VCALOC01", "SICCOB"],
-  [124, "Oceania", "10.101.90.140", "OCEDUL16", "SICCOB"],
-  [125, "Ojo De Agua", "10100175114", "OJODUL02", "SICCOB"],
-  [126, "Otay", "10.100.122.116", "OTYDUL01", "SICCOB"],
-  [127, "Pabellon M", "10.100.62.109", "ONMDUL03", "N10"],
-  [128, "Palmira", "10.100.176.113", "PMRDUL06", "SICCOB"],
-  [129, "Park Plaza", "10100163102", "PARDUL02", "SICCOB"],
-  [130, "Parque Delta R", "10.100.110.108", "PDEDUL14", "SICCOB"],
-  [131, "Parque Lindavista", "10.101.19.137", "VITDUL01", "SICCOB"],
-  [132, "Paseo Alcalde", "10.100.50.104", "ALCDUL01", "SICCOB"],
-  [133, "Paseo Chalco", "10.101.20.111", "PCLDUL01", "SICCOB"],
-  [134, "Paseo Hipodromo P", "10.100.65.113", "HIPTAQ01", "N10"],
-  [135, "Paseo Jardines", "10.100.129.109", "PJXDUL09", "SICCOB"],
-  [136, "Paseo Los Mochis", "10.101.21.121", "GLMDUL09", "SICCOB"],
-  [137, "Paseo Queretaro R", "10100131123", "QPQLOC01", "SICCOB"],
-  [138, "Paseo Solidaridad", "10.100.32.124", "SADDUL01", "SICCOB"],
-  [139, "Patio Revolucion", "10.100.34.109", "MOLOCURA01", "SICCOB"],
-  [140, "Patio Tollocan", "10.100.76.135", "TLLDUL02", "SICCOB"],
-  [141, "Patriotismo", "10.100.94.137", "PATAQ01", "SICCOB"],
-  [142, "Peninsula De Tijuana", "10.100.92.136", "TIUDUL12", "SICCOB"],
-  [143, "Playa Del Carmen", "10.101.27.122", "PCADUL03", "SICCOB"],
-  [144, "Plaza Bella Anahuac", "10.101.60.106", "SINDUL06", "SICCOB"],
-  [145, "Plaza Bella Coacalco", "10.100.100.107", "PBCDUL01", "SICCOB"],
-  [146, "Coacalco", "10.100.202.109", "CCODUL01", "SICCOB"],
-  [147, "Plaza Bella Oaxaca", "10.101.28.117", "BOXDUL07", "SICCOB"],
-  [148, "Plaza Bugambilia R", "10.100.167.102", "AVADUL01", "N10"],
-  [149, "Plaza Del Valle", "10.101.31.113", "OAXDUL07", "SICCOB"],
-  [150, "Plaza Dorada Puebla", "10.101.32.103", "PDPDUL10", "SICCOB"],
-  [151, "Plaza El Camino Cd Juarez", "10.101.33.106", "JUADUL01", "SICCOB"],
-  [152, "Plaza Inova", "10.100.101.109", "OVATAQ03", "N10"],
-  [153, "Plaza Jardines Tultitlan", "10.100.13.108", "JTUDUL01", "N10"],
-  [154, "Plaza Las Torres Angelopolis", "10.100.25.108", "ANGDUL01", "SICCOB"],
-  [155, "Plaza Oriente", "10.101.38.139", "OTEDUL09", "SICCOB"],
-  [156, "Plaza Pabellon Culiacan", "10.100.67.100", "BCUDUL01", "SICCOB"],
-  [157, "Plaza Patria R", "10.100.59.152", "PPBTAQ01", "SICCOB"],
-  [158, "Plaza Real Reynosa", "10.100.108.116", "REYDUL01", "SICCOB"],
-  [159, "Plaza Q", "10.101.39.116", "PLQACC02", "SICCOB"],
-  [160, "Plaza Stadium", "10.101.42.111", "GLEDUL03", "SICCOB"],
-  [161, "Plazas Outlet", "10100244102", "OUTDUL06", "SICCOB"],
-  [162, "Portal Centro", "10.100.68.103", "POCDUL02", "N10"],
-  [163, "Portal Durango", "10.101.85.118", "DUADUL07", "SICCOB"],
-  [164, "Portal Fresnillo", "10.100.130.121", "FRLDUL07", "SICCOB"],
-  [165, "Portal Vallejo", "10.100.47.114", "CIRDUL06", "N10"],
-  [166, "Prado Coapa", "10.101.44.104", "PRCDUL08", "SICCOB"],
-  [167, "Puebla Centro", "10.101.45.20", "CTODUL06", "SICCOB"],
-  [168, "Puerta Texcoco", "10.101.47.123", "PTXDUL08", "SICCOB"],
-  [169, "Puerto Paraiso R", "10.100.16.152", "CABDUL01", "N10"],
-  [170, "Puerto Vallarta", "10.101.48.113", "PTODUL07", "SICCOB"],
-  [171, "Ramos Arizpe", "10.100.42.116", "RIZDUL01", "SICCOB"],
-  [172, "Real", "10.100.150.107", "REAACC01", "N10"],
-  [173, "Reforma", "10.101.49.102", "REFDUL02", "SICCOB"],
-  [174, "Reforma 222", "10.100.164.100", "RERTAQ06", "SICCOB"],
-  [175, "Rosario 242", "10.101.52.111", "ROSDUL01", "N10"],
-  [176, "Salamanca", "10.100.18.111", "SALDUL11", "SICCOB"],
-  [177, "Salinas Victoria", "10.100.55.109", "VICTAQ02", "SICCOB"],
-  [178, "Saltillo", "10.101.54.102", "SATLOC01", "SICCOB"],
-  [179, "San Antonio", "10.100.98.109", "SANDUL01", "N10"],
-  [180, "San Francisco", "10.100.171.126", "PUEACC01", "SICCOB"],
-  [181, "San Gaspar", "10.100.109.101", "GASDUL08", "N10"],
-  [182, "San Jose Del Cabo", "10.100.43.102", "SJCDUL01", "SICCOB"],
-  [183, "San Juan", "10.100.43.109", "SJRDUL01", "SICCOB"],
-  [184, "San Mateo", "10.100.146.107", "SMADUL08", "N10"],
-  [185, "San Miguel", "10.101.59.109", "SMDDUL07", "N10"],
-  [186, "San Roque", "10.101.61.112", "QUEDUL06", "SICCOB"],
-  [187, "Sania", "10.100.31.115", "ANILOC01", "SICCOB"],
-  [188, "Santa Catarina", "10.101.63.139", "SCADUL01", "SICCOB"],
-  [189, "Santa Fe R", "10.100.77.123", "SFEDUL03", "SICCOB"],
-  [190, "Santin", "10.101.64.102", "SANDUL01", "N10"],
-  [191, "Solesta", "10100116100", "MIMDUL14", "SICCOB"],
-  [192, "Soriana Cordoba", "10.100.206.104", "OBADUL07", "SICCOB"],
-  [193, "Soriana Tapachula", "10.100.87.102", "TAPDUL01", "SICCOB"],
-  [194, "Sun Mall", "10.101.81.119", "3SGDUL16", "SICCOB"],
-  [195, "Sun Mall Hermosillo", "10.101.89.105", "SMHDUL01", "SICCOB"],
-  [196, "Sun Mall Juarez", "10.100.78.117", "3SJDUL01", "SICCOB"],
-  [197, "Tampico", "10.100.104.109", "TAMDUL04", "N10"],
-  [198, "Tecamac", "10.101.67.111", "TCMDUL08", "SICCOB"],
-  [199, "Tenayuca", "10100160103", "TENDUL08", "N10"],
-  [200, "Tepic", "10.100.88.112", "TEPDUL01", "SICCOB"],
-  [201, "Texcoco", "10.101.68.118", "TEXDUL09", "SICCOB"],
-  [202, "Tezontle", "10.101.69.103", "TEZDUL02", "SICCOB"],
-  [203, "The Park P", "10.101.50.105", "TPPTAQ01", "SICCOB"],
-  [204, "Tijuana Pacifico", "10.100.12.113", "TJUDUL01", "SICCOB"],
-  [205, "Tijuana Pavilion", "10.101.25.107", "PVLDUL04", "SICCOB"],
-  [206, "Tlahuac", "10.100.102.100", "THADUL12", "SICCOB"],
-  [207, "Tlalpan", "10.101.70.112", "TLPDUL06", "SICCOB"],
-  [208, "Tlaquepaque", "10.100.85.105", "TLADUL05", "SICCOB"],
-  [209, "Toltecas", "10.100.27.105", "TLTDUL01", "SICCOB"],
-  [210, "Toluca", "10.100.93.115", "TOLDUL01", "SICCOB"],
-  [211, "Torreon", "10100168100", "TORDUL02", "SICCOB"],
-  [212, "Town Square Metepec R", "10.100.126.101", "TWODUL01", "SICCOB"],
-  [213, "Triangulo Puebla", "10.100.139.109", "TRIDUL04", "N10"],
-  [214, "Tulancingo", "10.101.71.109", "TULACC02", "N10"],
-  [215, "Universidad", "10100106104", "UNIDUL01", "SICCOB"],
-  [216, "Uptown Merida", "10.100.53.112", "OWNDUL01", "SICCOB"],
-  [217, "Velamar", "10.101.95.112", "VELDUL01", "SICCOB"],
-  [218, "Via Cordillera P", "10.100.69.103", "VIPCAI01", "SICCOB"],
-  [219, "Via San Juan", "10.100.20.109", "VSJDUL08", "SICCOB"],
-  [220, "Zacatecas", "10.101.76.138", "ZACDUL01", "SICCOB"],
-  [221, "Zamora", "10.101.23.107", "PZMDUL07", "SICCOB"],
-  [222, "Zapopan", "10.101.77.133", "ZANDUL01", "SICCOB"],
-   
+        [1, "Aguascalientes", "10.100.179.109", "AGSDUL05", "N10"],
+        [2, "Alaia Tapachula", "10.100.155.112", "PJXDUL01", "SICCOB"],
+        [3, "Altabrisa P", "10.100.10.169", "VLTAQ05", "SICCOB"],
+        [4, "Altabrisa R", "10.100.10.169", "VALTAQ05", "SICCOB"],
+        [5, "Altavista", "10.100.96.110", "ALTDUL01", "N10"],
+        [6, "Amalucan", "10.101.97.146", "AMADUL07", "SICCOB"],
+        [7, "Ambar Capital R", "10.101.84.109", "AMCDUL11", "SICCOB"],
+        [8, "Andador Morelia", "10.100.33.119", "AMODUL09", "SICCOB"],
+        [9, "Andamar P", "10.100.181.121", "ANPTAQ01", "SICCOB"],
+        [10, "Antara P", "10.100.165.122", "PANBAR01", "SICCOB"],
+        [11, "Arenal", "10.100.54.117", "AREDUL07", "SICCOB"],
+        [12, "Artz Pedregal P", "10.101.83.118", "APZCAI03", "SICCOB"],
+        [13, "Atana Lindavista", "10.101.98.109", "ATIDUL01", "SICCOB"],
+        [14, "Atlacomulco", "10.100.182.118", "ATLDUL10", "SICCOB"],
+        [15, "Boulevares Queretaro", "10100184108", "QRODUL06", "SICCOB"],
+        [16, "Candiles", "10.100.173.118", "CANDUL05", "N10"],
+        [17, "Canek", "10100187119", "CNKDUL10", "SICCOB"],
+        [18, "Carso Tlalnepantla", "10.100.8.129", "PTADUL02", "SICCOB"],
+        [19, "Cd Azteca", "10100188115", "AZTDUL01", "N10"],
+        [20, "Cd Valles", "10.100.192.115", "CDVDUL02", "SICCOB"],
+        [21, "Centrika", "10100194117", "CTKDUL02", "SICCOB"],
+        [22, "Centro Telmex", "10.100.103.113", "CTXDUL05", "N10"],
+        [23, "Chalco 196", "10100196106", "CHADUL07", "SICCOB"],
+        [24, "Chetumal", "10.100.197.109", "CHEDUL02", "SICCOB"],
+        [25, "Cibeles", "10100112103", "CCIDUL08", "N10"],
+        [26, "Citadella R", "10.100.199.109", "CDADUL03", "N10"],
+        [27, "City Center Villahermosa", "10.100.132.109", "CCVDUL02", "N10"],
+        [28, "Ciudad Del Carmen", "10.100.189.101", "CDCDUL05", "N10"],
+        [29, "Claveria", "10100201118", "VEADUL01", "N10"],
+        [30, "Coacalco", "10.100.202.114", "CCODUL01", "SICCOB"],
+        [31, "Coapa", "10.100.35.148", "COADUL01", "SICCOB"],
+        [32, "Constituyentes", "10.100.178.102", "CTYDUL02", "SICCOB"],
+        [33, "Cortijo", "10100207103", "COTDUL01", "SICCOB"],
+        [34, "Crystal Villahermosa", "10.100.123.41", "CVLDUL02", "SICCOB"],
+        [35, "Cuatro Caminos", "10.100.49.135", "CCCLOC01", "SICCOB"],
+        [36, "Cuatro Rios", "10.101.65.101", "CCRACC01", "SICCOB"],
+        [37, "Cuauhtemoc", "10100105126", "CUADUL06", "N10"],
+        [38, "Cuautitlan Ii", "10.100.21.107", "CUTDUL09", "SICCOB"],
+        [39, "Cuautla", "10100177108", "CUUDUL01", "N10"],
+        [40, "Cuicuilco R", "10.100.148.105", "CUIDUL07", "SICCOB"],
+        [41, "Distrito Uno R", "10.100.75.116", "DIUDUL08", "SICCOB"],
+        [42, "Durango R", "10.100.211.122", "DGODUL01", "N10"],
+        [43, "Duraznos", "10100137117", "DUPBAR01", "SICCOB"],
+        [44, "Ecatepec", "10.100.145.114", "ECADUL05", "SICCOB"],
+        [45, "El Paseo", "10.100.86.117", "EPAACC01", "SICCOB"],
+        [46, "Encinas", "10.100.213.105", "ENCDUL02", "SICCOB"],
+        [47, "Explanada Culiacan", "10.101.96.65", "EXCDUL12", "SICCOB"],
+        [48, "Explanada Pachuca", "10.100.133.115", "EPCDUL01", "SICCOB"],
+        [49, "Explanada Puebla", "10100115124", "EPUDUL01", "SICCOB"],
+        [50, "Fashion Drive P", "10.100.51.114", "FDPTAQ01", "SICCOB"],
+        [51, "Felix Cuevas P", "10.100.36.110", "FIXDUL01", "SICCOB"],
+        [52, "Ferreria", "10.100.72.111", "FERLOC01", "N10"],
+        [53, "Fiesta Anahuac", "10100101112", "ANADUL08", "SICCOB"],
+        [54, "Forum Coatzacoalcos R", "10.100.216.119", "CTZDUL01", "SICCOB"],
+        [55, "Forum Cuernavaca", "10.100.52.135", "FCNDUL02", "N10"],
+        [56, "Forum Culiacan R", "10.100.217.122", "FORDUL08", "SICCOB"],
+        [57, "Forum Tepic R", "10100218142", "FTEDUL07", "N10"],
+        [58, "Fuentes Mares", "10.100.91.100", "MARDUL03", "SICCOB"],
+        [59, "Galerias", "10100147116", "GALDUL01", "SICCOB"],
+        [60, "Galerias Mazatlan R", "10.100.220.109", "GAZDUL07", "N10"],
+        [61, "Galerias Merida R", "10100221133", "GMEDUL03", "SICCOB"],
+        [62, "Galerias Saltillo R", "10.100.222.159", "GSTDUL02", "SICCOB"],
+        [63, "Galerias Tec", "10.100.169.109", "TECDUL01", "N10"],
+        [64, "Galerías Tlaxcala", "10.100.58.121", "TLXACC02", "SICCOB"],
+        [65, "Galerias Tuxtla", "10.100.223.109", "XTADUL01", "N10"],
+        [66, "Garza Sada", "10.100.66.113", "GARDUL02", "SICCOB"],
+        [67, "Gomez Palacio", "10100224119", "GPADUL02", "SICCOB"],
+        [68, "Gran Patio Pachuca", "10.100.225.109", "GPPTAQ01", "SICCOB"],
+        [69, "Gran Sur", "10.100.95.129", "GSUDUL01", "SICCOB"],
+        [70, "Guadalajara", "10.100.144.117", "GUADUL02", "SICCOB"],
+        [71, "Guaymas", "10.100.229.109", "GYMDUL01", "N10"],
+        [72, "Hermanos Serdan", "10.100.231.116", "HESACC02", "SICCOB"],
+        [73, "Heroes Cancun", "10.100.11.109", "HERTAQ04", "SICCOB"],
+        [74, "Hilvana", "10.100.63.109", "HIVDUL01", "SICCOB"],
+        [75, "Hollywood Chihuahua R", "10100232110", "WODDUL01", "SICCOB"],
+        [76, "Humberto Lobo", "10.100.233.113", "HLODUL03", "SICCOB"],
+        [77, "Insurgentes", "10100154108", "INSDUL07", "N10"],
+        [78, "Intermall R", "10.100.22.120", "ILLDUL02", "SICCOB"],
+        [79, "Irapuato", "10100234119", "ATODUL01", "SICCOB"],
+        [80, "Itzaes", "10.101.91.109", "ITZTDU04", "SICCOB"],
+        [81, "Izcalli", "10100161104", "IZCDUL02", "SICCOB"],
+        [82, "Iztapalapa", "10.100.107.129", "IZTDUL12", "SICCOB"],
+        [83, "Jurica", "10.100.30.111", "JURDUL07", "SICCOB"],
+        [84, "Juventud", "10.100.235.101", "JUVDUL05", "SICCOB"],
+        [85, "La Gran Via Mexicali", "10.100.38.123", "XICDUL07", "N10"],
+        [86, "La isla P", "10.100.79.128", "ISPTAQ03", "N10"],
+        [87, "La Joya", "10100236108", "LJYDUL06", "N10"],
+        [88, "La Via", "10.100.241.100", "VIALOC01", "SICCOB"],
+        [89, "La Viga", "10.100.174124", "LVIDUL01", "N10"],
+        [90, "Libramiento", "10.101.86.120", "MPLTDU07", "SICCOB"],
+        [91, "Lincoln", "10.100.48.103", "LINTAQ02", "SICCOB"],
+        [92, "Lindavista", "10.100.247.108", "LDVDUL08", "SICCOB"],
+        [93, "Loma Bonita", "10100248122", "LBODUL04", "SICCOB"],
+        [94, "Lomas Estrella", "10.100.26.121", "ESTDUL10", "SICCOB"],
+        [95, "Lomas Verdes", "10100166134", "VERDUL01", "SICCOB"],
+        [96, "Loreto", "10.100.97.108", "LORDUL08", "SICCOB"],
+        [97, "Los Reyes", "10.100.136.101", "LREDUL01", "SICCOB"],
+        [98, "Macroplaza Merida", "10.100.251.109", "MCMDUL05", "N10"],
+        [99, "Macroplaza Oaxaca", "10100252112", "OXDDUL02", "SICCOB"],
+        [100, "Macroplaza Tijuana", "10.100.253.129", "TIJDUL15", "SICCOB"],
+        [101, "Macroplaza Vallarta", "10100254111", "MVLDUL09", "SICCOB"],
+        [102, "Manacar", "10.100.56.124", "MANDUL10", "SICCOB"],
+        [103, "Martin Carrera", "10.100.135.111", "PMCDUL01", "SICCOB"],
+        [104, "Matamoros", "10.101.2.110", "MATDUL02", "SICCOB"],
+        [105, "Metepec Plaza La Pilita", "10100238112", "PILDUL05", "SICCOB"],
+        [106, "Metro Centro Hermosillo", "10.101.3.104", "HCMDUL01", "SICCOB"],
+        [107, "Mexiquense", "10.100.5.103", "MXQDUL04", "SICCOB"],
+        [108, "Mi Plaza Los Cabos", "10.100.44.116", "CAEDUL01", "SICCOB"],
+        [109, "Miguel Angel De Quevedo", "10100111144", "MAQDUL08", "SICCOB"],
+        [110, "Mirador Hermosillo", "10.101.6.101", "HSLDUL01", "SICCOB"],
+        [111, "Mirasierra", "10.100.17.110", "MSRDUL02", "SICCOB"],
+        [112, "Mol Concordia", "10.100.80.8", "APODUL05", "SICCOB"],
+        [113, "Monclova", "10.101.7.106", "MONDUL02", "SICCOB"],
+        [114, "Morelia Ii", "10.101.8.111", "MIIDUL08", "SICCOB"],
+        [115, "Multiplaza Cancun", "10.101.9.117", "MCUDUL08", "SICCOB"],
+        [116, "Mundo Divertido Tijuana", "10.101.11.102", "TJNDUL07", "SICCOB"],
+        [117, "Mundo E", "10.100.153.109", "MUEDUL02", "N10"],
+        [118, "Navojoa", "10.101.13.107", "NAVDUL08", "SICCOB"],
+        [119, "Downtown Puebla", "10100134124", "VELLUX", "SICCOB"],
+        [120, "Martin Carrera", "10.100.135.114", "PMCDUL11", "SICCOB"],
+        [121, "Downtown Puebla P", "10100134113", "DPPTAQ01", "SICCOB"],
+        [122, "Paseo San Pedro", "10.100.141.60", "PSPCAI01", "SICCOB"],
+        [123, "Nuevo Veracruz", "10.101.14.114", "VCALOC01", "SICCOB"],
+        [124, "Oceania", "10.101.90.140", "OCEDUL16", "SICCOB"],
+        [125, "Ojo De Agua", "10100175114", "OJODUL02", "SICCOB"],
+        [126, "Otay", "10.100.122.116", "OTYDUL01", "SICCOB"],
+        [127, "Pabellon M", "10.100.62.109", "ONMDUL03", "N10"],
+        [128, "Palmira", "10.100.176.113", "PMRDUL06", "SICCOB"],
+        [129, "Park Plaza", "10100163102", "PARDUL02", "SICCOB"],
+        [130, "Parque Delta R", "10.100.110.108", "PDEDUL14", "SICCOB"],
+        [131, "Parque Lindavista", "10.101.19.137", "VITDUL01", "SICCOB"],
+        [132, "Paseo Alcalde", "10.100.50.104", "ALCDUL01", "SICCOB"],
+        [133, "Paseo Chalco", "10.101.20.111", "PCLDUL01", "SICCOB"],
+        [134, "Paseo Hipodromo P", "10.100.65.113", "HIPTAQ01", "N10"],
+        [135, "Paseo Jardines", "10.100.129.109", "PJXDUL09", "SICCOB"],
+        [136, "Paseo Los Mochis", "10.101.21.121", "GLMDUL09", "SICCOB"],
+        [137, "Paseo Queretaro R", "10100131123", "QPQLOC01", "SICCOB"],
+        [138, "Paseo Solidaridad", "10.100.32.124", "SADDUL01", "SICCOB"],
+        [139, "Patio Revolucion", "10.100.34.109", "MOLOCURA01", "SICCOB"],
+        [140, "Patio Tollocan", "10.100.76.135", "TLLDUL02", "SICCOB"],
+        [141, "Patriotismo", "10.100.94.137", "PATAQ01", "SICCOB"],
+        [142, "Peninsula De Tijuana", "10.100.92.136", "TIUDUL12", "SICCOB"],
+        [143, "Playa Del Carmen", "10.101.27.122", "PCADUL03", "SICCOB"],
+        [144, "Plaza Bella Anahuac", "10.101.60.106", "SINDUL06", "SICCOB"],
+        [145, "Plaza Bella Coacalco", "10.100.100.107", "PBCDUL01", "SICCOB"],
+        [146, "Coacalco", "10.100.202.109", "CCODUL01", "SICCOB"],
+        [147, "Plaza Bella Oaxaca", "10.101.28.117", "BOXDUL07", "SICCOB"],
+        [148, "Plaza Bugambilia R", "10.100.167.102", "AVADUL01", "N10"],
+        [149, "Plaza Del Valle", "10.101.31.113", "OAXDUL07", "SICCOB"],
+        [150, "Plaza Dorada Puebla", "10.101.32.103", "PDPDUL10", "SICCOB"],
+        [151, "Plaza El Camino Cd Juarez", "10.101.33.106", "JUADUL01", "SICCOB"],
+        [152, "Plaza Inova", "10.100.101.109", "OVATAQ03", "N10"],
+        [153, "Plaza Jardines Tultitlan", "10.100.13.108", "JTUDUL01", "N10"],
+        [154, "Plaza Las Torres Angelopolis", "10.100.25.108", "ANGDUL01", "SICCOB"],
+        [155, "Plaza Oriente", "10.101.38.139", "OTEDUL09", "SICCOB"],
+        [156, "Plaza Pabellon Culiacan", "10.100.67.100", "BCUDUL01", "SICCOB"],
+        [157, "Plaza Patria R", "10.100.59.152", "PPBTAQ01", "SICCOB"],
+        [158, "Plaza Real Reynosa", "10.100.108.116", "REYDUL01", "SICCOB"],
+        [159, "Plaza Q", "10.101.39.116", "PLQACC02", "SICCOB"],
+        [160, "Plaza Stadium", "10.101.42.111", "GLEDUL03", "SICCOB"],
+        [161, "Plazas Outlet", "10100244102", "OUTDUL06", "SICCOB"],
+        [162, "Portal Centro", "10.100.68.103", "POCDUL02", "N10"],
+        [163, "Portal Durango", "10.101.85.118", "DUADUL07", "SICCOB"],
+        [164, "Portal Fresnillo", "10.100.130.121", "FRLDUL07", "SICCOB"],
+        [165, "Portal Vallejo", "10.100.47.114", "CIRDUL06", "N10"],
+        [166, "Prado Coapa", "10.101.44.104", "PRCDUL08", "SICCOB"],
+        [167, "Puebla Centro", "10.101.45.20", "CTODUL06", "SICCOB"],
+        [168, "Puerta Texcoco", "10.101.47.123", "PTXDUL08", "SICCOB"],
+        [169, "Puerto Paraiso R", "10.100.16.152", "CABDUL01", "N10"],
+        [170, "Puerto Vallarta", "10.101.48.113", "PTODUL07", "SICCOB"],
+        [171, "Ramos Arizpe", "10.100.42.116", "RIZDUL01", "SICCOB"],
+        [172, "Real", "10.100.150.107", "REAACC01", "N10"],
+        [173, "Reforma", "10.101.49.102", "REFDUL02", "SICCOB"],
+        [174, "Reforma 222", "10.100.164.100", "RERTAQ06", "SICCOB"],
+        [175, "Rosario 242", "10.101.52.111", "ROSDUL01", "N10"],
+        [176, "Salamanca", "10.100.18.111", "SALDUL11", "SICCOB"],
+        [177, "Salinas Victoria", "10.100.55.109", "VICTAQ02", "SICCOB"],
+        [178, "Saltillo", "10.101.54.102", "SATLOC01", "SICCOB"],
+        [179, "San Antonio", "10.100.98.109", "SANDUL01", "N10"],
+        [180, "San Francisco", "10.100.171.126", "PUEACC01", "SICCOB"],
+        [181, "San Gaspar", "10.100.109.101", "GASDUL08", "N10"],
+        [182, "San Jose Del Cabo", "10.100.43.102", "SJCDUL01", "SICCOB"],
+        [183, "San Juan", "10.100.43.109", "SJRDUL01", "SJRDUL01"], // Duplicado corregido estructuralmente
+        [184, "San Mateo", "10.100.146.107", "SMADUL08", "N10"],
+        [185, "San Miguel", "10.101.59.109", "SMDDUL07", "N10"],
+        [186, "San Roque", "10.101.61.112", "QUEDUL06", "SICCOB"],
+        [187, "Sania", "10.100.31.115", "ANILOC01", "SICCOB"],
+        [188, "Santa Catarina", "10.101.63.139", "SCADUL01", "SICCOB"],
+        [189, "Santa Fe R", "10.100.77.123", "SFEDUL03", "SICCOB"],
+        [190, "Santin", "10.101.64.102", "SANDUL01", "N10"],
+        [191, "Solesta", "10100116100", "MIMDUL14", "SICCOB"],
+        [192, "Soriana Cordoba", "10.100.206.104", "OBADUL07", "SICCOB"],
+        [193, "Soriana Tapachula", "10.100.87.102", "TAPDUL01", "SICCOB"],
+        [194, "Sun Mall", "10.101.81.119", "3SGDUL16", "SICCOB"],
+        [195, "Sun Mall Hermosillo", "10.101.89.105", "SMHDUL01", "SICCOB"],
+        [196, "Sun Mall Juarez", "10.100.78.117", "3SJDUL01", "SICCOB"],
+        [197, "Tampico", "10.100.104.109", "TAMDUL04", "N10"],
+        [198, "Tecamac", "10.101.67.111", "TCMDUL08", "SICCOB"],
+        [199, "Tenayuca", "10100160103", "TENDUL08", "N10"],
+        [200, "Tepic", "10.100.88.112", "TEPDUL01", "SICCOB"],
+        [201, "Texcoco", "10.101.68.118", "TEXDUL09", "SICCOB"],
+        [202, "Tezontle", "10.101.69.103", "TEZDUL02", "SICCOB"],
+        [203, "The Park P", "10.101.50.105", "TPPTAQ01", "SICCOB"],
+        [204, "Tijuana Pacifico", "10.100.12.113", "TJUDUL01", "SICCOB"],
+        [205, "Tijuana Pavilion", "10.101.25.107", "PVLDUL04", "SICCOB"],
+        [206, "Tlahuac", "10.100.102.100", "THADUL12", "SICCOB"],
+        [207, "Tlalpan", "10.101.70.112", "TLPDUL06", "SICCOB"],
+        [208, "Tlaquepaque", "10.100.85.105", "TLADUL05", "SICCOB"],
+        [209, "Toltecas", "10.100.27.105", "TLTDUL01", "SICCOB"],
+        [210, "Toluca", "10.100.93.115", "TOLDUL01", "SICCOB"],
+        [211, "Torreon", "10100168100", "TORDUL02", "SICCOB"],
+        [212, "Town Square Metepec R", "10.100.126.101", "TWODUL01", "SICCOB"],
+        [213, "Triangulo Puebla", "10.100.139.109", "TRIDUL04", "N10"],
+        [214, "Tulancingo", "10.101.71.109", "TULACC02", "N10"],
+        [215, "Universidad", "10100106104", "UNIDUL01", "SICCOB"],
+        [216, "Uptown Merida", "10.100.53.112", "OWNDUL01", "SICCOB"],
+        [217, "Velamar", "10.101.95.112", "VELDUL01", "SICCOB"],
+        [218, "Via Cordillera P", "10.100.69.103", "VIPCAI01", "SICCOB"],
+        [219, "Via San Juan", "10.100.20.109", "VSJDUL08", "SICCOB"],
+        [220, "Zacatecas", "10.101.76.138", "ZACDUL01", "SICCOB"],
+        [221, "Zamora", "10.101.23.107", "PZMDUL07", "SICCOB"],
+        [222, "Zapopan", "10.101.77.133", "ZANDUL01", "SICCOB"]
     ];
 
+    // =========================================================================
+    // INITIALIZE DATATABLES
+    // =========================================================================
     $(document).ready(function() {
         $('#tablaMaestra').DataTable({
             data: dataset,
             columns: [
-                { title: "#" },
-                { title: "Sucursal" },
-                { title: "IP" },
+                { data: 0 }, // Índice numérico
+                { data: 1 }, // Sucursal
+                { data: 2 }, // IP
+                { data: 3 }, // Nombre de Equipo
                 { 
-                    title: "EQUIPO",
+                    data: 4, // Columna de Empresa (Filtro de diseño)
                     render: function(data) {
-                        let clase = data === 'General' ? 'badge-General' : 'badge-n10';
-                        return `<span class="${clase}">${data}</span>`;
+                        // Aplica un badge dinámico dependiendo si es N10 o SICCOB
+                        let claseBadge = (data === 'N10') ? 'badge-n10' : 'badge-siccob';
+                        return `<span class="${claseBadge}">${data}</span>`;
                     }
-                },
-                { title: "Equipo" }
+                }
             ],
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
             },
             pageLength: 25,
             responsive: true
         });
+
+        // Al terminar de montar todo, disparamos el saludo y el ciclo de inactividad
+        generarSaludo();
+        reiniciarTemporizador();
     });
+
     // =========================================================================
-    // LÓGICA DEL SALUDO SEGÚN LA HORA Y NOMBRE
+    // LÓGICA DEL SALUDO INTELIGENTE Y NOMBRE
     // =========================================================================
     function generarSaludo() {
         const fecha = new Date();
@@ -316,16 +403,10 @@
         document.getElementById('saludoDinamico').innerText = `${saludo}, ${usuario}!`;
     }
 
-    // Ejecutar al cargar la página
-    window.onload = function() {
-        generarSaludo();
-        reiniciarTemporizador();
-    };
-
     // =========================================================================
-    // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
+    // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD TOTAL
     // =========================================================================
-    const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; 
+    const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; // 1 hora
     let temporizadorInactividad;
 
     function cerrarSesion() {
@@ -342,14 +423,14 @@
         }, TIEMPO_INACTIVIDAD);
     }
 
-    // Detectores de actividad para reiniciar la hora
+    // Detectores de actividad física para suspender/reiniciar el ciclo
     window.onmousemove = reiniciarTemporizador;
     window.onmousedown = reiniciarTemporizador; 
     window.onclick = reiniciarTemporizador;     
     window.onkeydown = reiniciarTemporizador;   
     window.onscroll = reiniciarTemporizador;    
 
-    // Bloqueo F5 teclado
+    // Bloqueo F5 teclado físico
     window.addEventListener('keydown', function(e) {
         if (e.keyCode === 116 || (e.ctrlKey && e.keyCode === 82) || (e.metaKey && e.keyCode === 82)) {
             e.preventDefault();
