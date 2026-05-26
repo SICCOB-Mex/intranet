@@ -7,63 +7,85 @@
     <style>
         body { font-family: Arial, sans-serif; padding: 40px; background-color: #f8f9fa; margin: 0; }
         .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); max-width: 600px; margin: auto; }
-        h1 { color: #2c3e50; }
-        button { padding: 10px 15px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        h1 { color: #2c3e50; margin-bottom: 5px; }
+        .welcome-msg { font-size: 24px; font-weight: bold; color: #007bff; margin-top: 0; }
+        button { padding: 10px 15px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <script>
-    // REGLA DE SEGURIDAD LOCAL: Si no pasaron por el login, los bota inmediatamente
+    // REGLA DE SEGURIDAD: Si intentan entrar directo sin login, los saca
     if (sessionStorage.getItem('sesionActiva') !== 'true') {
         window.location.href = "index.html";
     }
 
-    // REGLA: CIERRE DE SESIÓN SI DAN F5 / RECARGAR
+    // REGLA: CIERRE DE SESIÓN SI SE DA UN F5 O RECARGAR PÁGINA
     if (window.performance && window.performance.getEntriesByType) {
         const tiposNavegacion = window.performance.getEntriesByType("navigation");
         if (tiposNavegacion.length > 0 && tiposNavegacion[0].type === "reload") {
-            sessionStorage.removeItem('sesionActiva'); // Destruye la sesión
-            window.location.href = "index.html"; // Expulsa
+            sessionStorage.removeItem('sesionActiva');
+            sessionStorage.removeItem('nombreUsuario');
+            window.location.href = "index.html";
         }
     }
 </script>
 
 <div class="container">
-    <button onclick="cerrarSesion()">Cerrar Sesión Manualmente</button>
+    <p id="saludoDinamico" class="welcome-msg">Cargando saludo...</p>
+    
+    <h1>¡Bienvenido al sistema interno de SICCOB!</h1>
+    <p>Esta página contiene información confidencial exclusiva para los usuarios autorizados.</p>
+    <hr>
+    <p>Tu sesión se suspenderá y cerrará automáticamente tras 1 hora de inactividad.</p>
+    <br>
+    <button onclick="cerrarSesion()">Cerrar Sesión Manualmente 🚪</button>
 </div>
 
-
 <script>
-    // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
+    // =========================================================================
+    // LÓGICA DEL SALUDO SEGÚN LA HORA Y NOMBRE
+    // =========================================================================
+    function generarSaludo() {
+        const fecha = new Date();
+        const hora = fecha.getHours(); // Obtiene la hora actual (0 a 23)
+        let saludo = "";
 
-    // ... (Código anterior del login exitoso) ...
-if (usuariosAutorizados[emailBase64] === passwordBase64) {
-    errorDiv.style.display = 'none';
-    
-    // 1. Guardamos la sesión activa
-    sessionStorage.setItem('sesionActiva', 'true');
-    
-    // 2. NUEVO: Extraemos el nombre del correo (ej: "shernandez" de shernandez@siccob.com.mx)
-    // y lo guardamos limpio capitalizando la primera letra
-    const nombreUsuario = emailIngresado.split('@')[0];
-    const nombreFormateado = nombreUsuario.charAt(0).toUpperCase() + nombreUsuario.slice(1);
-    sessionStorage.setItem('nombreUsuario', nombreFormateado);
-    
-    window.location.href = "dashboard.html";
-}
-// ... (Resto del código) ...
-        
-    const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; // 1 hora en milisegundos
+        // Determinamos el saludo según el rango de horas
+        if (hora >= 6 && hora < 12) {
+            saludo = "☀️ ¡Buen día";
+        } else if (hora >= 12 && hora < 19) {
+            saludo = "⛅ ¡Buena tarde";
+        } else {
+            saludo = "🌙 ¡Buena noche";
+        }
+
+        // Recuperamos el nombre que guardó el login (si no hay, por defecto dice Usuario)
+        const usuario = sessionStorage.getItem('nombreUsuario') || "Usuario";
+
+        // Imprimimos el saludo final en la pantalla
+        document.getElementById('saludoDinamico').innerText = `${saludo}, ${usuario}!`;
+    }
+
+    // Ejecutamos el saludo inmediatamente al cargar la página
+    window.onload = function() {
+        generarSaludo();
+        reiniciarTemporizador(); // Arranca también el conteo de inactividad
+    };
+
+    // =========================================================================
+    // REGLA: TEMPORIZADOR DE 1 HORA POR INACTIVIDAD
+    // =========================================================================
+    const TIEMPO_INACTIVIDAD = 60 * 60 * 1000; 
     let temporizadorInactividad;
 
     function cerrarSesion() {
         alert("Tu sesión ha finalizado.");
         sessionStorage.removeItem('sesionActiva');
+        sessionStorage.removeItem('nombreUsuario');
         window.location.href = "index.html"; 
     }
 
-    // Si hay actividad, se suspende el conteo y vuelve a empezar la hora desde cero
     function reiniciarTemporizador() {
         clearTimeout(temporizadorInactividad);
         temporizadorInactividad = setTimeout(() => {
@@ -71,15 +93,14 @@ if (usuariosAutorizados[emailBase64] === passwordBase64) {
         }, TIEMPO_INACTIVIDAD);
     }
 
-    // Detectores de actividad del usuario
-    window.onload = reiniciarTemporizador;
+    // Detectores de actividad
     window.onmousemove = reiniciarTemporizador;
     window.onmousedown = reiniciarTemporizador; 
     window.onclick = reiniciarTemporizador;     
     window.onkeydown = reiniciarTemporizador;   
     window.onscroll = reiniciarTemporizador;    
 
-    // Bloqueo extra por si presionan la tecla física F5 o comandos de recarga
+    // Bloqueo F5 teclado
     window.addEventListener('keydown', function(e) {
         if (e.keyCode === 116 || (e.ctrlKey && e.keyCode === 82) || (e.metaKey && e.keyCode === 82)) {
             e.preventDefault();
