@@ -169,7 +169,7 @@
             saludo = "🌙 ¡Buena noche";
         }
 
-        const usuario = sessionStorage.getItem('nombreUsuario') || "Usuario";
+        const usuario = sessionStorage.getItem('nombreUsuario') || "";
         document.getElementById('saludoDinamico').innerText = `${saludo}, ${usuario}!`;
     }
 
