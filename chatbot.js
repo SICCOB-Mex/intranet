@@ -112,12 +112,12 @@ function ejecutarPasosA1() {
         // Puedes cambiar este texto por tus pasos reales de trabajo:
         msgBot.innerHTML = `
             <b>Guía de Instalación del Módulo A1:</b><br><br>
-            1️⃣ <b>Paso 1:</b> Descarga el paquete oficial desde el repositorio local o solicita el archivo .zip al supervisor.<br>
-            2️⃣ <b>Paso 2:</b> Descomprime los archivos en la ruta raíz del sistema <code>C:\\SICCOB\\A1</code>.<br>
-            3️⃣ <b>Paso 3:</b> Abre la consola de comandos (CMD) como Administrador y ejecuta el comando de inicialización.<br>
-            4️⃣ <b>Paso 4:</b> Configura la IP del nodo asignado en el archivo de propiedades y guarda los cambios.<br>
-            5️⃣ <b>Paso 5:</b> Reinicia el servicio y realiza una prueba de ping para validar la conexión con la Mesa de Ayuda.<br><br>
-            <i>Si el sistema arroja un error de credenciales o de puerto bloqueado, comunícate de inmediato con el Administrador de red.</i>
+            1️⃣ <b>Paso 1:</b> <p> Preciona Win + R, para abrir el ejecutar. </p><br>
+            2️⃣ <b>Paso 2:</b> Ingresa la ip segun el complejo direccionando a la carpeta sistema$. Ejemplo (\\10.100.9.10\sistemas$) enter.<br>
+            3️⃣ <b>Paso 3:</b> Busca la carpeta A1setup e ingresa a ella.<br>
+            4️⃣ <b>Paso 4:</b> Ejecuta el Setup A1 Cliente.<br>
+            5️⃣ <b>Paso 5:</b> Abre el simbolo del sistema (cmd) y ejecuta los siguientes parametros: <p> a1exec setdsn</p>:Configura el portal según su ip y guarda los datos.<br><br>en el mismo cmd ejecuta a1exec setportal seguido de la ip del servidor del complejo <br>por último se ejecuta a1exec sync.<br><br> 
+            <i>Si el sistema arroja un error revisa nuevamente la ip</i>
         `;
         chatCuerpo.appendChild(msgBot);
 
