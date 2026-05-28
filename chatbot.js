@@ -91,3 +91,42 @@ function scrollAlFinal() {
     const chatCuerpo = document.getElementById('chatCuerpo');
     chatCuerpo.scrollTop = chatCuerpo.scrollHeight;
 }
+
+// =========================================================================
+// PROCESO DE SOPORTE: PASO A PASO PARA INSTALACIÓN DE A1
+// =========================================================================
+function ejecutarPasosA1() {
+    const chatCuerpo = document.getElementById('chatCuerpo');
+
+    // 1. Simulamos que el usuario presionó la opción
+    const msgUser = document.createElement('div');
+    msgUser.className = 'msg msg-user';
+    msgUser.innerText = "Instalación de A1";
+    chatCuerpo.appendChild(msgUser);
+
+    // 2. El Bot responde con el instructivo estructurado
+    setTimeout(() => {
+        const msgBot = document.createElement('div');
+        msgBot.className = 'msg msg-bot';
+        
+        // Puedes cambiar este texto por tus pasos reales de trabajo:
+        msgBot.innerHTML = `
+            <b>Guía de Instalación del Módulo A1:</b><br><br>
+            1️⃣ <b>Paso 1:</b> Descarga el paquete oficial desde el repositorio local o solicita el archivo .zip al supervisor.<br>
+            2️⃣ <b>Paso 2:</b> Descomprime los archivos en la ruta raíz del sistema <code>C:\\SICCOB\\A1</code>.<br>
+            3️⃣ <b>Paso 3:</b> Abre la consola de comandos (CMD) como Administrador y ejecuta el comando de inicialización.<br>
+            4️⃣ <b>Paso 4:</b> Configura la IP del nodo asignado en el archivo de propiedades y guarda los cambios.<br>
+            5️⃣ <b>Paso 5:</b> Reinicia el servicio y realiza una prueba de ping para validar la conexión con la Mesa de Ayuda.<br><br>
+            <i>Si el sistema arroja un error de credenciales o de puerto bloqueado, comunícate de inmediato con el Administrador de red.</i>
+        `;
+        chatCuerpo.appendChild(msgBot);
+
+        // Añadimos el botón obligatorio para regresar al menú principal
+        const contenedorOpciones = document.createElement('div');
+        contenedorOpciones.className = 'bot-opciones';
+        contenedorOpciones.innerHTML = `<button class="opcion-btn text-center fw-bold" onclick="LimpiarYRegresar()">⬅️ Volver al Menú de Soporte</button>`;
+        chatCuerpo.appendChild(contenedorOpciones);
+        
+        scrollAlFinal();
+    }, 400);
+}
