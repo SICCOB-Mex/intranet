@@ -1,23 +1,12 @@
 /* =========================================================================
    ESTILOS COMPONENTES CHATBOT FLOTANTE EXTERNO (ICONO MÁS GRANDE)
    ========================================================================= */
-.chat-burbuja {
-    position: fixed;
-    bottom: 35px;
-    right: 35px;
-    width: 110px;  /* Aumentado de 60px a 85px */
-    height: 110px; /* Aumentado de 60px a 85px */
-    background-color: #1a365d;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 85px; /* Aumentado de 28px a 42px para que el emoji sea más grande */
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25); /* Sombra un poco más profunda por el tamaño */
-    transition: transform 0.2s;
-    z-index: 1000;
+.chat-burbuja img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;   /* Hace que la imagen mantenga la forma circular del botón */
+    object-fit: cover;    /* Evita que el PNG se estire o se deforme */
+    display: block;
 }
 .chat-burbuja:hover { 
     transform: scale(1.08); 
