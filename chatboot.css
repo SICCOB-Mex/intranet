@@ -5,8 +5,8 @@
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 85px;  /* Aumentado de 60px a 85px */
-    height: 85px; /* Aumentado de 60px a 85px */
+    width: 95px;  /* Aumentado de 60px a 85px */
+    height: 95px; /* Aumentado de 60px a 85px */
     background-color: #1a365d;
     border-radius: 50%;
     display: flex;
