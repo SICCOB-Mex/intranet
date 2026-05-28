@@ -6,10 +6,10 @@ let chatIniciado = false;
 // Insertar de forma automática la estructura HTML del bot en la página donde se llame
 document.addEventListener("DOMContentLoaded", function() {
     const estructuraBot = `
-        <div class="chat-burbuja" onclick="alternarChat()">🤖</div>
+        <div class="chat-burbuja" onclick="alternarChat()"></div>
         <div class="chat-ventana" id="chatVentana">
             <div class="chat-header">
-                <span>🤖 Soporte SICCOB Bot</span>
+                <span>🤖 SICCOB BOT</span>
                 <button class="chat-cerrar" onclick="alternarChat()">✕</button>
             </div>
             <div class="chat-cuerpo" id="chatCuerpo"></div>
@@ -114,11 +114,11 @@ function ejecutarPasosA1() {
             <b>Guía de Instalación del Módulo A1:</b><br><br>
             1️⃣ <b>Paso 1:</b> <p> Preciona Win + R, para abrir el ejecutar.<br> 
             2️⃣ <b>Paso 2:</b> Ingresa la ip según el complejo direccionando a la carpeta sistema$. Ejemplo:<br>
-            <img src="sistema$.png" style="width: 50%; border-radius: 6px; margin: 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" alt="sistemas$"></p><br>
+            <img src="sistema$.png" style="width: 35%; border-radius: 6px; margin: 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" alt="sistemas$"></p><br>
             3️⃣ <b>Paso 3:</b> Busca la carpeta A1SETUP e ingresa a ella.<br>
-             <img src="Carpeta1.png" style="width: 50%; border-radius: 6px; margin: 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" alt="sistemas$"></p><br>
+             <img src="Carpeta1.png" style="width: 35%; border-radius: 6px; margin: 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" alt="sistemas$"></p><br>
             4️⃣ <b>Paso 4:</b> Ejecuta el Setup Admin One Client Installer.<br>
-            <img src="a1.png" style="width: 50%; border-radius: 6px; margin: 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" alt="sistemas$"></p><br>
+            <img src="a1.png" style="width: 35%; border-radius: 6px; margin: 8px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" alt="sistemas$"></p><br>
             5️⃣ <b>Paso 5:</b> Abre el simbolo del sistema (cmd) y ejecuta los siguientes parametros: <p> a1exec setdsn</p>:Configura el portal según su ip y guarda los datos.<br><br>en el mismo cmd ejecuta a1exec setportal seguido de la ip del servidor del complejo <br>por último se ejecuta a1exec sync.<br><br> 
             <i>Si el sistema arroja un error revisa nuevamente la ip</i>
         `;
