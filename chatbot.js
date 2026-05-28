@@ -50,6 +50,7 @@ function desplegarMenuPrincipal() {
         <button class="opcion-btn" onclick="responderOpcion('ADIST', 'Si la plataforma ADIST de Helpdesk no responde, verifica tu conexión al nodo central. ¿Deseas validar el estatus del servidor de soporte externo?')">📊 Falla en plataforma ADIST</button>
         <button class="opcion-btn" onclick="responderOpcion('Delivery', 'En el módulo DELIVERY puedes consultar IP, Sucursal y Nombres de equipo. Si una IP listada cambió o no responde ping, repórtalo al supervisor con la nomenclatura exacta.')">📦 Consulta sobre Equipos Delivery</button>
         <button class="opcion-btn" onclick="responderOpcion('N10', 'El Consolidado Nivel-10 muestra los cines que no atiendes directamente. Recuerda revisar la marquesina de comunicados importantes (ej. cierres de Punta Langosta y El Salto).')">🖥️ Duda con Asignaciones N10</button>
+        <button class="opcion-btn" onclick="ejecutarPasosA1()">⚙️ Instalación de A1</button>
     `;
     chatCuerpo.appendChild(contenedorOpciones);
     scrollAlFinal();
