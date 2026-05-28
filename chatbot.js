@@ -38,7 +38,7 @@ function alternarChat() {
 
 function desplegarMenuPrincipal() {
     const chatCuerpo = document.getElementById('chatCuerpo');
-    const usuario = sessionStorage.getItem('nombreUsuario') || "Usuario";
+    const usuario = sessionStorage.getItem('nombreUsuario') || "Amo";
 
     // Mensaje inicial del bot
     const msgBot = document.createElement('div');
