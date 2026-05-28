@@ -6,7 +6,7 @@ let chatIniciado = false;
 // Insertar de forma automática la estructura HTML del bot en la página donde se llame
 document.addEventListener("DOMContentLoaded", function() {
     const estructuraBot = `
-        <div class="chat-burbuja" onclick="alternarChat()"></div>
+        <div class="chat-burbuja" onclick="alternarChat()">🤖</div>
         <div class="chat-ventana" id="chatVentana">
             <div class="chat-header">
                 <span>🤖 SICCOB BOT</span>
