@@ -4,20 +4,24 @@
 let chatIniciado = false;
 
 // Insertar de forma automática la estructura HTML del bot en la página donde se llame
+// ... dentro de chatbot.js (al inicio) ...
 document.addEventListener("DOMContentLoaded", function() {
     const estructuraBot = `
-        <div class="chat-burbuja" onclick="alternarChat()">🤖</div>
+        <div class="chat-burbuja" onclick="alternarChat()">
+            <img id="iconoChatbotFlotante" src="chat-bot.png" alt="Soporte Bot">
+        </div>
+        
         <div class="chat-ventana" id="chatVentana">
             <div class="chat-header">
-                <span>🤖 SICCOB BOT</span>
+                <span> SICCOB Bot</span>
                 <button class="chat-cerrar" onclick="alternarChat()">✕</button>
             </div>
             <div class="chat-cuerpo" id="chatCuerpo"></div>
         </div>
     `;
-    // Agrega el HTML al final del body de la página
     document.body.insertAdjacentHTML('beforeend', estructuraBot);
 });
+// ... resto del código ...
 
 function alternarChat() {
     const chatVentana = document.getElementById('chatVentana');
