@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         <div class="chat-ventana" id="chatVentana">
             <div class="chat-header">
-                <span> SICCOB Bot</span>
+                <span> 🤖 SICCOB Bot 🤖</span>
                 <button class="chat-cerrar" onclick="alternarChat()">✕</button>
             </div>
             <div class="chat-cuerpo" id="chatCuerpo"></div>
