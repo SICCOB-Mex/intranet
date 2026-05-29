@@ -2,9 +2,9 @@
    ESTILOS COMPONENTES CHATBOT FLOTANTE EXTERNO (ICONO MÁS GRANDE)
    ========================================================================= */
 .chat-burbuja img {
-    width: 35%;
-    height: 35%;
-    border-radius: 50%;   /* Hace que la imagen mantenga la forma circular del botón */
+    width: 20%;
+    height: 20%;
+    border-radius: 35%;   /* Hace que la imagen mantenga la forma circular del botón */
     object-fit: cover;    /* Evita que el PNG se estire o se deforme */
     display: block;
 }
