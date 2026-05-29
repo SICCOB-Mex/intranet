@@ -1,27 +1,49 @@
 /* =========================================================================
-   ESTILOS COMPONENTES CHATBOT FLOTANTE EXTERNO (ICONO MÁS GRANDE)
+   CONTENEDOR PRINCIPAL: Aquí controlas el tamaño general del Bot
    ========================================================================= */
+.chat-burbuja {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 65px;          /* Reducido a 65px para que sea sutil y pequeño */
+    height: 65px;         /* Reducido a 65px para mantener la proporción */
+    background-color: transparent; /* Fondo transparente para que luzca tu PNG */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+    z-index: 1000;
+}
+
+/* LA IMAGEN: Ocupa el 100% de la caja de 65px para no desalinearse */
 .chat-burbuja img {
-    width: 20%;
-    height: 20%;
-    border-radius: 35%;   /* Hace que la imagen mantenga la forma circular del botón */
-    object-fit: cover;    /* Evita que el PNG se estire o se deforme */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;   /* Mantiene el recorte circular perfecto */
+    object-fit: contain;  /* Usa 'contain' para que la burbuja de diálogo de la foto no se corte */
     display: block;
 }
+
 .chat-burbuja:hover { 
     transform: scale(1.08); 
 }
 
+/* =========================================================================
+   VENTANA DEL CHAT (Se mantiene igual)
+   ========================================================================= */
 .chat-ventana {
     position: fixed;
-    bottom: 95px;
+    bottom: 100px;        /* Ajustado a 100px para que abra justo arriba del bot de 65px */
     right: 25px;
     width: 350px;
     height: 450px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-    display: none; /* Oculto por defecto */
+    display: none; 
     flex-direction: column;
     overflow: hidden;
     z-index: 1000;
