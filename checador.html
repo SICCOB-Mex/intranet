@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checador de Asistencia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #666;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #25D366; /* Color WhatsApp */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Checador de Asistencia</h2>
+    
+    <div class="form-group">
+        <label for="nombre">Nombre del Empleado:</label>
+        <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+    </div>
+
+    <div class="form-group">
+        <label for="cine">Cine / Sucursal:</label>
+        <select id="cine">
+            <option value="">-- Selecciona un Cine --</option>
+            <option value="Cine Centro">Cine Centro</option>
+            <option value="Cine Plaza Norte">Cine Plaza Norte</option>
+            <option value="Cine VIP Las Torres">Cine VIP Las Torres</option>
+        </select>
+    </div>
+
+    <button onclick="procesarRegistro()">Checar Entrada / Salida</button>
+</div>
+
+<script>
+function procesarRegistro() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const cine = document.getElementById('cine').value;
+
+    // Validación básica
+    if (!nombre || !cine) {
+        alert("Por favor, completa tu Nombre y selecciona el Cine.");
+        return;
+    }
+
+    // Solicitar ubicación al navegador
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const linkUbicacion = `https://www.google.com/maps?q=${lat},${lon}`;
+                
+                // Enviar datos si se obtuvo la ubicación
+                enviarWhatsApp(nombre, cine, linkUbicacion);
+            },
+            (error) => {
+                alert("Error: Debes permitir el acceso a la ubicación para poder checar.");
+            },
+            { enableHighAccuracy: true } // Fuerza al GPS a ser lo más preciso posible
+        );
+    } else {
+        alert("Tu navegador no soporta geolocalización.");
+    }
+}
+
+function enviarWhatsApp(nombre, cine, linkUbicacion) {
+    // ⚠️ REEMPLAZA ESTE NÚMERO CON EL TUYO (Incluye código de país, ej: 52 para México)
+    const miTelefono = "52561288177"; 
+
+    // Auto-detectar Fecha y Hora local
+    const ahora = new Date();
+    const fecha = ahora.toLocaleDateString('es-MX');
+    const hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    // Armar el mensaje con formato de WhatsApp (*texto* = Negrita)
+    const mensaje = `*NUEVO REGISTRO DE ASISTENCIA*%0A%0A` +
+                    `*Empleado:* ${encodeURIComponent(nombre)}%0A` +
+                    `*Cine:* ${encodeURIComponent(cine)}%0A` +
+                    `*Fecha:* ${fecha}%0A` +
+                    `*Hora:* ${hora}%0A` +
+                    `*Ubicación:* ${encodeURIComponent(linkUbicacion)}`;
+
+    // Crear el enlace universal de WhatsApp
+    const urlWhatsApp = `https://wa.me/${miTelefono}?text=${mensaje}`;
+
+    // Redirigir a WhatsApp (abrirá la app en celular o WhatsApp Web en PC)
+    window.open(urlWhatsApp, '_blank');
+}
+</script>
+
+</body>
+</html>
