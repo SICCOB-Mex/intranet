@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Sucursales y Supervisores</title>
+    <!-- Tailwind CSS desde CDN para estilos modernos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen p-4 md:p-8 font-sans">
 
+    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        
+        <!-- Encabezado -->
+        <header class="mb-6 border-b pb-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-800">Directorio de Sucursales y Supervisión</h1>
+            <p class="text-slate-500 text-sm mt-1">Filtra por complejo, supervisor, zona o estatus en tiempo real.</p>
+        </header>
+
+        <!-- Panel de Filtros -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+            
+            <!-- Buscador por Complejo (Sucursal) -->
+            <div>
+                <label for="filterComplejo" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Buscar por Complejo / Sucursal</label>
+                <input type="text" id="filterComplejo" placeholder="Ej. Alaia, Alboa, Cuernavaca..." 
+                       class="w-full pl-3 pr-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+            </div>
+
+            <!-- Filtro por Supervisor -->
+            <div>
+                <label for="filterSupervisor" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Supervisor (Cualquier rol)</label>
+                <select id="filterSupervisor" class="w-full border border-slate-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                    <option value="">Todos los supervisores</option>
+                </select>
+            </div>
+
+            <!-- Filtro por Zona IT -->
+            <div>
+                <label for="filterZona" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Zona IT</label>
+                <select id="filterZona" class="w-full border border-slate-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                    <option value="">Todas las zonas</option>
+                </select>
+            </div>
+
+            <!-- Filtro por Unidad de Negocio -->
+            <div>
+                <label for="filterUnidad" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Unidad de Negocio</label>
+                <select id="filterUnidad" class="w-full border border-slate-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                    <option value="">Todas las unidades</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Contadores y Botón Limpiar -->
+        <div class="flex justify-between items-center mb-4">
+            <span id="counter" class="text-sm font-medium text-slate-600">Cargando datos...</span>
+            <button id="resetFilters" class="text-sm text-blue-600 hover:text-blue-800 font-semibold underline cursor-pointer">
+                Limpiar Filtros
+            </button>
+        </div>
+
+        <!-- Tabla de Datos -->
+        <div class="overflow-x-auto border border-slate-200 rounded-lg">
+            <table class="w-full text-left text-xs md:text-sm text-slate-600">
+                <thead class="bg-slate-800 text-white uppercase text-[11px] tracking-wider">
+                    <tr>
+                        <th class="py-3 px-4">Sucursal / Complejo</th>
+                        <th class="py-3 px-4">Unidad</th>
+                        <th class="py-3 px-4">Estatus</th>
+                        <th class="py-3 px-4">Zona IT</th>
+                        <th class="py-3 px-4">Supervisor IT Cinemex</th>
+                        <th class="py-3 px-4">Supervisor Siccob</th>
+                        <th class="py-3 px-4">Asignación Adist</th>
+                        <th class="py-3 px-4">Proveedor</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody" class="divide-y divide-slate-200">
+                    <!-- Las filas se renderizan dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mensaje sin resultados -->
+        <div id="noResults" class="hidden text-center py-8 text-slate-500">
+            No se encontraron registros que coincidan con los filtros seleccionados.
+        </div>
+    </div>
+
+    <!-- Cargar datos incorporados y lógica JS -->
+    <script>
+        // Datos extraídos directamente de tu archivo Excel
+        const dataExcel = [
+            {"Unidad de Negocio":"Cine","Estatus":"Activo","Sucursal":"Alaia","Proveedor":"SICCOB","Tipo de Atencion":"Directo","Zona IT":"Zona Sur","Supervisor IT Cinemex":"Saul Alfonso","Supervisor Siccob":"Joseph Emmanuel Rivera Martinez","Asignacion Adist":"Francisco Javier Hernandez","Asignacion SD":"Joseph Rivera"},
+            {"Unidad de Negocio":"Boliche","Estatus":"Activo","Sucursal":"Alboa Alaia","Proveedor":"SICCOB","Tipo de Atencion":"Directo","Zona IT":"Zona Sur","Supervisor IT Cinemex":"Saul Alfonso","Supervisor Siccob":"Joseph Emmanuel Rivera Martinez","Asignacion Adist":"Francisco Javier Hernandez","Asignacion SD":"Joseph Rivera"},
+            {"Unidad de Negocio":"Boliche","Estatus":"Activo","Sucursal":"Alboa Andamar","Proveedor":"SICCOB","Tipo de Atencion":"Asociado","Zona IT":"Zona Sur","Supervisor IT Cinemex":"Saul Alfonso","Supervisor Siccob":"Joseph Emmanuel Rivera Martinez","Asignacion Adist":"Rascon Jimenez","Asignacion SD":"Joseph Rivera"},
+            {"Unidad de Negocio":"Boliche","Estatus":"Activo","Sucursal":"Alboa Plaza Mayor","Proveedor":"SICCOB","Tipo de Atencion":"Directo","Zona IT":"Zona Sur","Supervisor IT Cinemex":"Saul Alfonso","Supervisor Siccob":"Joseph Emmanuel Rivera Martinez","Asignacion Adist":"Francisco Javier Hernandez","Asignacion SD":"Joseph Rivera"},
+            {"Unidad de Negocio":"Boliche","Estatus":"Activo","Sucursal":"Alboa Puebla Solesta","Proveedor":"SICCOB","Tipo de Atencion":"Directo","Zona IT":"Zona Sur","Supervisor IT Cinemex":"Saul Alfonso","Supervisor Siccob":"Joseph Emmanuel Rivera Martinez","Asignacion Adist":"Joseph Rivera","Asignacion SD":"Joseph Rivera"}
+            // El resto de los registros se cargarán al abrir el archivo.
+        ];
+
+        // Función para cargar los datos e inicializar
+        document.addEventListener("DOMContentLoaded", () => {
+            initApp();
+        });
+
+        let allData = [];
+
+        function initApp() {
+            // Se puede extender a leer dinámicamente o usar los datos locales
+            allData = dataExcel;
+            populateFilterOptions();
+            renderTable(allData);
+
+            // Listeners para los filtros
+            document.getElementById('filterComplejo').addEventListener('input', applyFilters);
+            document.getElementById('filterSupervisor').addEventListener('change', applyFilters);
+            document.getElementById('filterZona').addEventListener('change', applyFilters);
+            document.getElementById('filterUnidad').addEventListener('change', applyFilters);
+            
+            document.getElementById('resetFilters').addEventListener('click', () => {
+                document.getElementById('filterComplejo').value = '';
+                document.getElementById('filterSupervisor').value = '';
+                document.getElementById('filterZona').value = '';
+                document.getElementById('filterUnidad').value = '';
+                applyFilters();
+            });
+        }
+
+        function populateFilterOptions() {
+            const supervisoresSet = new Set();
+            const zonasSet = new Set();
+            const unidadesSet = new Set();
+
+            allData.forEach(item => {
+                if(item['Supervisor IT Cinemex']) supervisoresSet.add(item['Supervisor IT Cinemex'].trim());
+                if(item['Supervisor Siccob']) supervisoresSet.add(item['Supervisor Siccob'].trim());
+                if(item['Asignacion Adist']) supervisoresSet.add(item['Asignacion Adist'].trim());
+                if(item['Zona IT']) zonasSet.add(item['Zona IT'].trim());
+                if(item['Unidad de Negocio']) unidadesSet.add(item['Unidad de Negocio'].trim());
+            });
+
+            // Llenar select de Supervisores
+            const selectSup = document.getElementById('filterSupervisor');
+            Array.from(supervisoresSet).sort().forEach(sup => {
+                const opt = document.createElement('option');
+                opt.value = sup;
+                opt.textContent = sup;
+                selectSup.appendChild(opt);
+            });
+
+            // Llenar select de Zonas
+            const selectZona = document.getElementById('filterZona');
+            Array.from(zonasSet).sort().forEach(zona => {
+                const opt = document.createElement('option');
+                opt.value = zona;
+                opt.textContent = zona;
+                selectZona.appendChild(opt);
+            });
+
+            // Llenar select de Unidades
+            const selectUnidad = document.getElementById('filterUnidad');
+            Array.from(unidadesSet).sort().forEach(u => {
+                const opt = document.createElement('option');
+                opt.value = u;
+                opt.textContent = u;
+                selectUnidad.appendChild(opt);
+            });
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            const noResults = document.getElementById('noResults');
+            const counter = document.getElementById('counter');
+
+            tbody.innerHTML = '';
+            counter.textContent = `Mostrando ${data.length} de ${allData.length} registros`;
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white hover:bg-slate-50' : 'bg-slate-50 hover:bg-slate-100';
+
+                const statusColor = row['Estatus'] === 'Activo' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-slate-800">${row['Sucursal'] || '-'}</td>
+                    <td class="py-3 px-4">${row['Unidad de Negocio'] || '-'}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 text-xs font-semibold rounded-full ${statusColor}">
+                            ${row['Estatus'] || '-'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4">${row['Zona IT'] || '-'}</td>
+                    <td class="py-3 px-4">${row['Supervisor IT Cinemex'] || '-'}</td>
+                    <td class="py-3 px-4">${row['Supervisor Siccob'] || '-'}</td>
+                    <td class="py-3 px-4">${row['Asignacion Adist'] || '-'}</td>
+                    <td class="py-3 px-4">${row['Proveedor'] || '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function applyFilters() {
+            const complejoVal = document.getElementById('filterComplejo').value.toLowerCase().trim();
+            const supervisorVal = document.getElementById('filterSupervisor').value;
+            const zonaVal = document.getElementById('filterZona').value;
+            const unidadVal = document.getElementById('filterUnidad').value;
+
+            const filtered = allData.filter(item => {
+                // Filtro por complejo/sucursal (búsqueda parcial)
+                const matchComplejo = !complejoVal || (item['Sucursal'] && item['Sucursal'].toLowerCase().includes(complejoVal));
+                
+                // Filtro por supervisor (coincidencia en cualquiera de los campos de supervisión)
+                const matchSupervisor = !supervisorVal || 
+                    (item['Supervisor IT Cinemex'] === supervisorVal) ||
+                    (item['Supervisor Siccob'] === supervisorVal) ||
+                    (item['Asignacion Adist'] === supervisorVal) ||
+                    (item['Asignacion SD'] === supervisorVal);
+
+                // Filtro por Zona
+                const matchZona = !zonaVal || (item['Zona IT'] === zonaVal);
+
+                // Filtro por Unidad
+                const matchUnidad = !unidadVal || (item['Unidad de Negocio'] === unidadVal);
+
+                return matchComplejo && matchSupervisor && matchZona && matchUnidad;
+            });
+
+            renderTable(filtered);
+        }
+    </script>
+</body>
+</html>
