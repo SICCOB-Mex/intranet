@@ -362,14 +362,14 @@
                 { data: 1 }, // Sucursal
                 { data: 2 }, // IP
                 { data: 3 }, // Nombre de Equipo
-                {data: 5}  // Fecha actualizado
+                {data:  5},  // Fecha actualizado
                 { 
                     data: 4, // Columna de Empresa (Filtro de diseño)
                     render: function(data) {
                         // Aplica un badge dinámico dependiendo si es N10 o SICCOB
                         let claseBadge = (data === 'N10') ? 'badge-n10' : 'badge-siccob';
                         return `<span class="${claseBadge}">${data}</span>`;
-                    },
+                    }
                 
                 }
             ],
