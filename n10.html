@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -136,7 +135,7 @@
                 </tr>
             </thead>
             <tbody>
-                </tbody>
+            </tbody>
         </table>
     </div>
 </div>
@@ -146,7 +145,6 @@
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-    // Datos combinados de ambas imágenes
     const dataset = [
         [1, "Altavista", "CDMX", "No Atiende", "N10"],
         [2, "Centro Telmex", "CDMX", "No Atiende", "N10"],
@@ -207,7 +205,69 @@
         [57, "GUAYMAS", "SONORA", "No Atiende", "N10"],
         [58, "LA ISLA CANCUN", "QUINTANA ROO", "No Atiende", "N10"],
         [59, "CANDILES", "QUERÉTARO", "No Atiende", "N10"],
-        [60, "GALERÍAS MAZATLÁN", "SINALOA", "No Atiende", "N10"]
+        [60, "GALERÍAS MAZATLÁN", "SINALOA", "No Atiende", "N10"],
+        /* --- FALTANTES AGREGADOS --- */
+        [61, "Santa Fe R", "CDMX", "No Atiende", "N10"],
+        [62, "Los Reyes", "Edo. Mex", "No Atiende", "N10"],
+        [63, "Ecatepec", "Edo. Mex", "No Atiende", "N10"],
+        [64, "Cuicuilco R", "CDMX", "No Atiende", "N10"],
+        [65, "Gran Sur", "CDMX", "No Atiende", "N10"],
+        [66, "Toluca", "Edo. Mex", "No Atiende", "N10"],
+        [67, "Coapa", "CDMX", "No Atiende", "N10"],
+        [68, "Coacalco", "Edo. Mex", "No Atiende", "N10"],
+        [69, "Las Plazas", "Morelos", "No Atiende", "N10"],
+        [70, "Parque Delta R", "CDMX", "No Atiende", "N10"],
+        [71, "Patriotismo", "CDMX", "No Atiende", "N10"],
+        [72, "Solesta", "Puebla", "No Atiende", "N10"],
+        [73, "Humberto Lobo", "Nuevo León", "No Atiende", "N10"],
+        [74, "Sun Mall", "Nuevo León", "No Atiende", "N10"],
+        [75, "Centrika", "Nuevo León", "No Atiende", "N10"],
+        [76, "Plazas Outlet", "Jalisco", "No Atiende", "N10"],
+        [77, "Paseo San Pedro", "Nuevo León", "No Atiende", "N10"],
+        [78, "Galerias Merida R", "Yucatán", "No Atiende", "N10"],
+        [79, "Cardenas", "Tabasco", "No Atiende", "N10"],
+        [80, "El Patio Poza Rica", "Veracruz", "No Atiende", "N10"],
+        [81, "Tlaquepaque", "Jalisco", "No Atiende", "N10"],
+        [82, "Plaza Mayor R", "Guanajuato", "No Atiende", "N10"],
+        [83, "Matamoros", "Tamaulipas", "No Atiende", "N10"],
+        [84, "Plaza Real Reynosa", "Tamaulipas", "No Atiende", "N10"],
+        [85, "Forum Culiacan", "Sinaloa", "No Atiende", "N10"],
+        [86, "Ojo De Agua", "Edo. Mex", "No Atiende", "N10"],
+        [87, "Macroplaza Tijuana", "Baja California", "No Atiende", "N10"],
+        [88, "Cd Guzman", "Jalisco", "No Atiende", "N10"],
+        [89, "Puerto Vallarta", "Jalisco", "No Atiende", "N10"],
+        [90, "Gomez Palacio", "Durango", "No Atiende", "N10"],
+        [91, "Encinas", "Sonora", "No Atiende", "N10"],
+        [92, "Navojoa", "Sonora", "No Atiende", "N10"],
+        [93, "Paseo Los Mochis", "Sinaloa", "No Atiende", "N10"],
+        [94, "Tuxtepec", "Oaxaca", "No Atiende", "N10"],
+        [95, "Plaza Del Valle", "Oaxaca", "No Atiende", "N10"],
+        [96, "Constituyentes", "Querétaro", "No Atiende", "N10"],
+        [97, "Valladolid", "Yucatán", "No Atiende", "N10"],
+        [98, "Multiplaza Cancun", "Quintana Roo", "No Atiende", "N10"],
+        [99, "Cuicuilco P", "CDMX", "No Atiende", "N10"],
+        [100, "Plaza Dorada Puebla", "Puebla", "No Atiende", "N10"],
+        [101, "Ahora", "CDMX", "No Atiende", "N10"],
+        [102, "Plaza Bella Coacalco", "Edo. Mex", "No Atiende", "N10"],
+        [103, "Tlalpan", "CDMX", "No Atiende", "N10"],
+        [104, "Prado Coapa", "CDMX", "No Atiende", "N10"],
+        [105, "Reforma", "CDMX", "No Atiende", "N10"],
+        [106, "Zapopan", "Jalisco", "No Atiende", "N10"],
+        [107, "Antara P", "CDMX", "No Atiende", "N10"],
+        [108, "Altabrisa R", "Yucatán", "No Atiende", "N10"],
+        [109, "Plaza Stadium", "Guanajuato", "No Atiende", "N10"],
+        [110, "Morelia Ii", "Michoacán", "No Atiende", "N10"],
+        [111, "Canek", "Yucatán", "No Atiende", "N10"],
+        [112, "San Roque", "Guanajuato", "No Atiende", "N10"],
+        [113, "Paseo Ventura", "Edo. Mex", "No Atiende", "N10"],
+        [114, "Andamar P", "Veracruz", "No Atiende", "N10"],
+        [115, "Alaia Tapachula", "Chiapas", "No Atiende", "N10"],
+        [116, "Downtown Puebla P", "Puebla", "No Atiende", "N10"],
+        [117, "Patriotismo P", "CDMX", "No Atiende", "N10"],
+        [118, "Lomas Verdes P", "Edo. Mex", "No Atiende", "N10"],
+        [119, "Arena Santa Fe", "CDMX", "No Atiende", "N10"],
+        [120, "Arena Solesta", "Puebla", "No Atiende", "N10"],
+        [121, "Alboa Santa Fe", "CDMX", "No Atiende", "N10"]
     ];
 
     $(document).ready(function() {
@@ -233,7 +293,6 @@
             responsive: true
         });
 
-        // Lanzar funciones globales de control al finalizar la carga
         generarSaludo();
         reiniciarTemporizador();
     });
