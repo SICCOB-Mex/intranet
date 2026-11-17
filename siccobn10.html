@@ -1,0 +1,3161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Nacional de Complejos Cinemex | IT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen antialiased selection:bg-rose-600 selection:text-white">
+
+    <!-- BARRA SUPERIOR HERO / DASHBOARD -->
+    <div class="bg-gradient-to-r from-zinc-900 via-zinc-900 to-rose-950/40 border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold tracking-wide uppercase mb-2">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                        Soporte IT &bull; Cobertura Nacional
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                        Directorio Maestro de Complejos Cinemex
+                    </h1>
+                    <p class="text-sm text-zinc-400 mt-1">
+                        Consulta rápida de atención por sucursal, proveedor asignado y supervisión IT Cinemex.
+                    </p>
+                </div>
+
+                <!-- TARJETAS KPI -->
+                <div class="grid grid-cols-3 gap-3 sm:gap-4 shrink-0">
+                    <div class="bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3 text-center">
+                        <span class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Total Visible</span>
+                        <span id="kpiTotal" class="text-xl sm:text-2xl font-extrabold text-white">305</span>
+                    </div>
+                    <div class="bg-sky-950/40 border border-sky-800/50 rounded-xl px-4 py-3 text-center">
+                        <span class="block text-[11px] font-semibold uppercase tracking-wider text-sky-400">SICCOB</span>
+                        <span id="kpiSiccob" class="text-xl sm:text-2xl font-extrabold text-sky-300">185</span>
+                    </div>
+                    <div class="bg-rose-950/40 border border-rose-800/50 rounded-xl px-4 py-3 text-center">
+                        <span class="block text-[11px] font-semibold uppercase tracking-wider text-rose-400">Nivel 10</span>
+                        <span id="kpiN10" class="text-xl sm:text-2xl font-extrabold text-rose-300">120</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- TARJETAS DE ESCALAMIENTO COMPACTAS -->
+        <section>
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-zinc-400">Matriz de Escalamiento IT Cinemex</h2>
+                <span class="text-xs text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md">
+                    &#9888; Verificar disponibilidad antes de canalizar en ADIST &bull; Nivel 10 no atiende SICCOB
+                </span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1 -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 hover:border-zinc-700 transition">
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-2.5">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 block">Nivel 1 &bull; Supervisor IT</span>
+                            <h3 class="text-base font-bold text-white">Luis Eugenio</h3>
+                        </div>
+                        <a href="tel:5591434600" class="text-xs font-mono font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-2.5 py-1 rounded-lg transition">
+                            55 9143 4600
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-zinc-400">
+                        <span>Backup: <strong class="text-zinc-200">Miguel Rojas</strong></span>
+                        <span class="font-mono">55 4781 7940</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 hover:border-zinc-700 transition">
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-2.5">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 block">Nivel 1 &bull; Supervisor IT</span>
+                            <h3 class="text-base font-bold text-white">Saul Alfonso</h3>
+                        </div>
+                        <a href="tel:5579045733" class="text-xs font-mono font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-2.5 py-1 rounded-lg transition">
+                            55 7904 5733
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-zinc-400">
+                        <span>Backup: <strong class="text-zinc-200">Andres Jacobo</strong></span>
+                        <span class="font-mono">55 5456 6916</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 hover:border-zinc-700 transition">
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5 mb-2.5">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 block">Nivel 1 &bull; Supervisor IT</span>
+                            <h3 class="text-base font-bold text-white">Jorge Juarez</h3>
+                        </div>
+                        <a href="tel:5541436336" class="text-xs font-mono font-semibold bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-2.5 py-1 rounded-lg transition">
+                            55 4143 6336
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-zinc-400">
+                        <span>Gerencia N3: <strong class="text-zinc-200">Luis Ramirez</strong></span>
+                        <span class="font-mono">55 1800 9773</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANEL DE BÚSQUEDA, PESTAÑAS Y VISTA -->
+        <section class="bg-zinc-900 border border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
+            
+            <!-- Barra de Pestañas de Proveedor + Switch de Vista -->
+            <div class="px-5 pt-4 pb-3 border-b border-zinc-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="inline-flex p-1 bg-zinc-950 rounded-xl border border-zinc-800 self-start" role="group">
+                    <button type="button" data-prov="" class="prov-tab px-3.5 py-1.5 text-xs font-bold rounded-lg bg-rose-600 text-white transition">
+                        Todos (305)
+                    </button>
+                    <button type="button" data-prov="SICCOB" class="prov-tab px-3.5 py-1.5 text-xs font-bold rounded-lg text-zinc-400 hover:text-white transition">
+                        SICCOB (185)
+                    </button>
+                    <button type="button" data-prov="Nivel 10" class="prov-tab px-3.5 py-1.5 text-xs font-bold rounded-lg text-zinc-400 hover:text-white transition">
+                        Nivel 10 (120)
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-zinc-400 mr-1">Vista:</span>
+                    <button id="btnViewTable" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-800 text-white border border-zinc-700 transition">
+                        &#9776; Tabla
+                    </button>
+                    <button id="btnViewCards" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800 transition">
+                        &#9638; Tarjetas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="p-5 bg-zinc-900/50 border-b border-zinc-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                <div class="lg:col-span-2">
+                    <label for="filterComplejo" class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-1">Buscar Sucursal o Estado</label>
+                    <input type="text" id="filterComplejo" placeholder="Escribe complejo, ciudad o estado..."
+                           class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500">
+                </div>
+
+                <div>
+                    <label for="filterSupervisor" class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-1">Supervisor IT Cinemex</label>
+                    <select id="filterSupervisor" class="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-xl text-sm text-white focus:outline-none focus:border-rose-500">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filterZona" class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-1">Zona IT</label>
+                    <select id="filterZona" class="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-xl text-sm text-white focus:outline-none focus:border-rose-500">
+                        <option value="">Todas las zonas</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filterUnidad" class="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-1">Unidad / Atención</label>
+                    <div class="flex gap-2">
+                        <select id="filterUnidad" class="w-full px-3 py-2 bg-zinc-950 border border-zinc-700 rounded-xl text-sm text-white focus:outline-none focus:border-rose-500">
+                            <option value="">Todas</option>
+                        </select>
+                        <button id="resetBtn" title="Limpiar filtros" class="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-xl text-xs font-bold transition shrink-0">
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR VISTA TABLA -->
+            <div id="tableContainer" class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead class="bg-zinc-950/80 text-zinc-400 uppercase text-[11px] tracking-wider border-b border-zinc-800">
+                        <tr>
+                            <th class="py-3.5 px-4 w-12">#</th>
+                            <th class="py-3.5 px-4">Sucursal</th>
+                            <th class="py-3.5 px-4">Estado</th>
+                            <th class="py-3.5 px-4">Unidad</th>
+                            <th class="py-3.5 px-4">Proveedor</th>
+                            <th class="py-3.5 px-4">Atención</th>
+                            <th class="py-3.5 px-4">Zona IT</th>
+                            <th class="py-3.5 px-4">Supervisor IT Cinemex</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-zinc-800/70">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- CONTENEDOR VISTA TARJETAS -->
+            <div id="cardsContainer" class="hidden p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            </div>
+
+            <!-- SIN RESULTADOS -->
+            <div id="noResults" class="hidden text-center py-12 text-zinc-500 text-sm">
+                No se encontraron complejos con los filtros seleccionados.
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        const dataConsolidada = [
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "AGUASCALIENTES",
+        "Estado": "Aguascalientes",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Alaia Guanajuato",
+        "Estado": "Guanajuato",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Alaia Tapachula",
+        "Estado": "Chiapas",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Alaia Guanajuato",
+        "Estado": "Guanajuato",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Andamar",
+        "Estado": "Veracruz",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Artz Pedregal",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Cananea",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Fashion Drive",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Landmark",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Metepec",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Metropoli Patriotismo",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Mundo E",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Nacozari",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Peninsula Tijuana",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Plaza Cuernavaca",
+        "Estado": "Morelos",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Plaza Mayor",
+        "Estado": "Guanajuato",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Santa Fe",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Solesta",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa The Park",
+        "Estado": "San Luis Potosí",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Boliche",
+        "Sucursal": "Alboa Tuxtla",
+        "Estado": "Chiapas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Altabrisa Villahermosa",
+        "Estado": "Tabasco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Altabrisa Villahermosa Platino",
+        "Estado": "Tabasco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Altavista",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Amalucan",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ambar Capital",
+        "Estado": "Chiapas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ambar Capital Platino",
+        "Estado": "Chiapas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Andamar P",
+        "Estado": "Veracruz",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Antara",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Antara P",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Apodaca",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Ambar Capital",
+        "Estado": "Chiapas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Artz Pedregal",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Distrito Uno",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Explanada Pachuca",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Fashion Drive",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Mundo E",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Plaza Patria",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Santa Fe",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Solesta",
+        "Estado": "Puebla",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Arena",
+        "Sucursal": "Arena Town Square Metepec",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Arenal",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Artz Pedregal",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Artz Pedregal Platino",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Atana Lindavista",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Atlacomulco",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Boulevares Queretaro",
+        "Estado": "Querétaro",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cananea",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "CANDILES",
+        "Estado": "Querétaro",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Canek",
+        "Estado": "Yucatán",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cardenas",
+        "Estado": "Tabasco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "CD DEL CARMEN",
+        "Estado": "Campeche",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cd Guzman",
+        "Estado": "Jalisco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cd Mante",
+        "Estado": "Tamaulipas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cd Valles",
+        "Estado": "San Luis Potosí",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Centrika",
+        "Estado": "Nuevo León",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Centro Telmex",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Chalco",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Chimalhuacan",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cibeles",
+        "Estado": "Morelos",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "CITADELLA",
+        "Estado": "San Luis Potosí",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "CITY CENTER VILLAHERMOSA",
+        "Estado": "Tabasco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ciudad Azteca",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ciudad Sahagun",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Claveria",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Coacalco",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Coapa",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Constituyentes",
+        "Estado": "Querétaro",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "CORDOBA",
+        "Estado": "Veracruz",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cortijo",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Crystal Villahermosa",
+        "Estado": "Tabasco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cuatro Caminos",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cuatro Rios",
+        "Estado": "Sinaloa",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cuauhtemoc",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cuautla",
+        "Estado": "Morelos",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cuicuilco P",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Cuicuilco R",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Delicias",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Distrito Uno Platino",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Distrito Uno Premium",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Down Town",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Downtown Puebla P",
+        "Estado": "Puebla",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Durango",
+        "Estado": "Durango",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "DURANGO PLATINO",
+        "Estado": "Durango",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Duraznos Platino",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ecatepec",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "El Paseo",
+        "Estado": "San Luis Potosí",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "El Patio Poza Rica",
+        "Estado": "Veracruz",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Encinas",
+        "Estado": "Sonora",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Encuentro Oceania",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Explanada Culiacan",
+        "Estado": "Sinaloa",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Explanada Pachuca",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Explanada Puebla",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Fashion Drive Platino",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Felix Cuevas Platino",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ferreria La villa",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Fiesta Anahuac",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Forum Coatzacoalcos",
+        "Estado": "Veracruz",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Forum Coatzacoalcos Platino",
+        "Estado": "Veracruz",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Forum Cuernavaca",
+        "Estado": "Morelos",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Forum Culiacan",
+        "Estado": "Sinaloa",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Forum Culiacan Platino",
+        "Estado": "Sinaloa",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Forum Tepic",
+        "Estado": "Nayarit",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "FORUM TEPIC PLATINO",
+        "Estado": "Nayarit",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Fresnillo",
+        "Estado": "Zacatecas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Fuentes Mares",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Insurgentes",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Los Mochis",
+        "Estado": "Sinaloa",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "GALERÍAS MAZATLÁN",
+        "Estado": "Sinaloa",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Mazatlan Platino",
+        "Estado": "Sinaloa",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Merida Platino",
+        "Estado": "Yucatán",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Merida R",
+        "Estado": "Yucatán",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Saltillo",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Saltillo Platino",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "GALERIAS TEC",
+        "Estado": "Chihuahua",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Galerias Tlaxcala",
+        "Estado": "Tlaxcala",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "GALERIAS TUXTLA",
+        "Estado": "Chiapas",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Garza Sada",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Gomez Palacio",
+        "Estado": "Durango",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Gran Patio Pachuca",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Gran Sur",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "GUAYMAS",
+        "Estado": "Sonora",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Hermanos Serdan",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Hilvana",
+        "Estado": "Querétaro",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Hollywood Chihuahua",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Huehuetoca",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Humberto Lobo",
+        "Estado": "Nuevo León",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Insurgentes",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Intermall",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Irapuato",
+        "Estado": "Guanajuato",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Itzaes",
+        "Estado": "Yucatán",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ixtapaluca",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Izcalli",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Iztapalapa",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Jardines Tultitlan",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Juventud",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "LA GRAN VÍA MEXICALI",
+        "Estado": "Baja California",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "LA ISLA CANCUN",
+        "Estado": "Quintana Roo",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "La Joya",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "La Piedad",
+        "Estado": "Michoacán de Ocampo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "La Pilita",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "La Via",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "LA VIGA",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Landmark Guadalajara Platino",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Landmark Market Tijuana",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Las Plazas Guadalajara",
+        "Estado": "Jalisco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Las Plazas Outlet",
+        "Estado": "Nuevo León",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Las Torres Puebla",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Lerma",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Lincoln",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Lindavista",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Loma Bonita",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Lomas Estrella",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Lomas Verdes",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Lomas Verdes P",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Loreto",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Los Heroes Cancun",
+        "Estado": "Quintana Roo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Los Reyes",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "MACROPLAZA MÉRIDA",
+        "Estado": "Yucatán",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Macroplaza Oaxaca",
+        "Estado": "Oaxaca",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Macroplaza Tijuana",
+        "Estado": "Baja California",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Macroplaza Vallarta",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Manacar",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Market Interlomas",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Matamoros",
+        "Estado": "Tamaulipas",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "MetroCentro Hermosillo",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mexiquense",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mi Plaza Libramiento",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mi Plaza Los Cabos",
+        "Estado": "Baja California Sur",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mirador Hermosillo",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mirasierra",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Monclova",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Morelia Ii",
+        "Estado": "Michoacán de Ocampo",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Multiplaza Cancun",
+        "Estado": "Quintana Roo",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mundo Divertido Tijuana",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mundo E",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Mundo E platino",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Nacozari",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Navojoa",
+        "Estado": "Sonora",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Nuevo Veracruz",
+        "Estado": "Veracruz",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ocotlan",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ojo De Agua",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Otay",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Pabellon Culiacan",
+        "Estado": "Sinaloa",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "PABELLÓN M",
+        "Estado": "Nuevo León",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Park Plaza",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Parque Delta Platino",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Parque Delta R",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Parque Lindavista",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Parque Lindavista Platino",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Parque Tezontle",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Alcalde",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Chalco",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Gomez Palacio",
+        "Estado": "Durango",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo hipodromo",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Jardines Xalapa",
+        "Estado": "Veracruz",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Queretaro",
+        "Estado": "Querétaro",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Queretaro Platino",
+        "Estado": "Querétaro",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo San Pedro",
+        "Estado": "Nuevo León",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Solidaridad",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Ventura",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Zamora",
+        "Estado": "Michoacán de Ocampo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Paseo Zihuatanejo",
+        "Estado": "Guerrero",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Patio Martin Carrera",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Patio Revolucion",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Patio Tollocan",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Patriotismo",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Patriotismo P",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Pavillion",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Peninsula Tijuana",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Peninsula Tijuana Platino",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Playa Del Carmen",
+        "Estado": "Quintana Roo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Bella Coacalco",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Bella Oaxaca",
+        "Estado": "Oaxaca",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Bugambilia",
+        "Estado": "Morelos",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "PLAZA BUGAMBILIA PLATINO",
+        "Estado": "Morelos",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Del Valle",
+        "Estado": "Oaxaca",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Dorada Puebla",
+        "Estado": "Puebla",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza El Camino Cd Juarez",
+        "Estado": "Chihuahua",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "PLAZA INOVA PIEDRAS NEGRAS",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Mayor Platino",
+        "Estado": "Guanajuato",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Mayor R",
+        "Estado": "Guanajuato",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Oriente",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Patria",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Patria Platino",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Q",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Real Reynosa",
+        "Estado": "Tamaulipas",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Plaza Stadium",
+        "Estado": "Guanajuato",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Portal Centro",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Portal Durango",
+        "Estado": "Durango",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Portal Fresnillo",
+        "Estado": "Zacatecas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Portal Vallejo",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Prado Coapa",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Progreso",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Puebla Centro",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Puebla San Francisco",
+        "Estado": "Puebla",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "PUEBLA TRIÁNGULO LAS ÁNIMAS",
+        "Estado": "Puebla",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Puerta Texcoco",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Puerto Paraiso",
+        "Estado": "Baja California Sur",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "PUERTO PARAISO PLATINO",
+        "Estado": "Baja California Sur",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Puerto Vallarta",
+        "Estado": "Jalisco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Punto Maq",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Ramos Arizpe",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Real",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Reforma 222",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Reforma Casa de Arte",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Rincon de Romos",
+        "Estado": "Aguascalientes",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "RIO GRANDE",
+        "Estado": "Zacatecas",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Rosario",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Salamanca",
+        "Estado": "Guanajuato",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "SALINAS CRUZ",
+        "Estado": "Oaxaca",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Salinas Victoria",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Saltillo",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Samara Satelite Platino",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "SAN ANTONIO",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "San Esteban",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "SAN GASPAR",
+        "Estado": "Jalisco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "San Jose Del Cabo",
+        "Estado": "Baja California Sur",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "San Juan Del Rio",
+        "Estado": "Querétaro",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "San Mateo",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "SAN MIGUEL ALLENDE",
+        "Estado": "Guanajuato",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "San Nicolas (Plaza Bella Anahuac)",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "San Roque",
+        "Estado": "Guanajuato",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Sania",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Santa Catarina",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Santa Fe Platino",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Santa Fe R",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "SANTIN (TOLUCA II)",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Solesta",
+        "Estado": "Puebla",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Sun Mall Guadalupe",
+        "Estado": "Nuevo León",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Sun Mall Hermosillo",
+        "Estado": "Sonora",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Sun Mall Villa Juarez",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "TAMPICO",
+        "Estado": "Tamaulipas",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tapachula",
+        "Estado": "Chiapas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tecamac",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tenayuca",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tepic",
+        "Estado": "Nayarit",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Texcoco",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "The Park",
+        "Estado": "San Luis Potosí",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "The Park Platino",
+        "Estado": "San Luis Potosí",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tijuana Pacifico",
+        "Estado": "Baja California",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tizayuca",
+        "Estado": "Hidalgo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tizimin",
+        "Estado": "Yucatán",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tlahuac",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tlalnepantla",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tlalpan",
+        "Estado": "CDMX",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tlaquepaque",
+        "Estado": "Jalisco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Toltecas",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Toluca",
+        "Estado": "Estado de México",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tonala",
+        "Estado": "Jalisco",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Torreon",
+        "Estado": "Coahuila de Zaragoza",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Town Square Metepec",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Town Square Metepec Platino",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "TULANCINGO",
+        "Estado": "Hidalgo",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Tuxtepec",
+        "Estado": "Oaxaca",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Universidad",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Uptown Merida",
+        "Estado": "Yucatán",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Urban Center Jurica",
+        "Estado": "Querétaro",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Valladolid",
+        "Estado": "Yucatán",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Velamar",
+        "Estado": "Quintana Roo",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Saul Alfonso"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Via Cordillera",
+        "Estado": "Nuevo León",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Via San Juan",
+        "Estado": "CDMX",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Luis Eugenio"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Zacatecas",
+        "Estado": "Zacatecas",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Asociado",
+        "Zona IT": "Zona Sur",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Zapopan",
+        "Estado": "Jalisco",
+        "Proveedor": "Nivel 10",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Norte",
+        "Supervisor IT Cinemex": "-"
+    },
+    {
+        "Unidad de Negocio": "Cine",
+        "Sucursal": "Zumpango",
+        "Estado": "Estado de México",
+        "Proveedor": "SICCOB",
+        "Tipo de Atencion": "Directo",
+        "Zona IT": "Zona Centro",
+        "Supervisor IT Cinemex": "Jorge Juarez"
+    }
+];
+
+        let currentProveedor = '';
+        let currentView = 'table';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initApp();
+        });
+
+        function initApp() {
+            populateFilterOptions();
+            renderContent(dataConsolidada);
+
+            document.getElementById('filterComplejo').addEventListener('input', applyFilters);
+            document.getElementById('filterSupervisor').addEventListener('change', applyFilters);
+            document.getElementById('filterZona').addEventListener('change', applyFilters);
+            document.getElementById('filterUnidad').addEventListener('change', applyFilters);
+
+            // Tabs de proveedor
+            document.querySelectorAll('.prov-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.prov-tab').forEach(b => {
+                        b.classList.remove('bg-rose-600', 'text-white');
+                        b.classList.add('text-zinc-400');
+                    });
+                    btn.classList.add('bg-rose-600', 'text-white');
+                    btn.classList.remove('text-zinc-400');
+                    currentProveedor = btn.getAttribute('data-prov');
+                    applyFilters();
+                });
+            });
+
+            // Switch de vista Tabla / Tarjetas
+            const btnTable = document.getElementById('btnViewTable');
+            const btnCards = document.getElementById('btnViewCards');
+
+            btnTable.addEventListener('click', () => {
+                currentView = 'table';
+                btnTable.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-800 text-white border border-zinc-700 transition';
+                btnCards.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800 transition';
+                document.getElementById('tableContainer').classList.remove('hidden');
+                document.getElementById('cardsContainer').classList.add('hidden');
+            });
+
+            btnCards.addEventListener('click', () => {
+                currentView = 'cards';
+                btnCards.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-800 text-white border border-zinc-700 transition';
+                btnTable.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800 transition';
+                document.getElementById('cardsContainer').classList.remove('hidden');
+                document.getElementById('tableContainer').classList.add('hidden');
+            });
+
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                document.getElementById('filterComplejo').value = '';
+                document.getElementById('filterSupervisor').value = '';
+                document.getElementById('filterZona').value = '';
+                document.getElementById('filterUnidad').value = '';
+                currentProveedor = '';
+                document.querySelectorAll('.prov-tab').forEach((b, i) => {
+                    if (i === 0) {
+                        b.classList.add('bg-rose-600', 'text-white');
+                        b.classList.remove('text-zinc-400');
+                    } else {
+                        b.classList.remove('bg-rose-600', 'text-white');
+                        b.classList.add('text-zinc-400');
+                    }
+                });
+                applyFilters();
+            });
+        }
+
+        function populateFilterOptions() {
+            const supSet = new Set();
+            const zonaSet = new Set();
+            const unidadSet = new Set();
+
+            dataConsolidada.forEach(item => {
+                const sup = (item['Supervisor IT Cinemex'] || '').trim();
+                if (sup && sup !== '-') supSet.add(sup);
+                if (item['Zona IT']) zonaSet.add(item['Zona IT'].trim());
+                if (item['Unidad de Negocio']) unidadSet.add(item['Unidad de Negocio'].trim());
+            });
+
+            const selectSup = document.getElementById('filterSupervisor');
+            Array.from(supSet).sort().forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s;
+                selectSup.appendChild(opt);
+            });
+
+            const selectZona = document.getElementById('filterZona');
+            Array.from(zonaSet).sort().forEach(z => {
+                const opt = document.createElement('option');
+                opt.value = z;
+                opt.textContent = z;
+                selectZona.appendChild(opt);
+            });
+
+            const selectUnidad = document.getElementById('filterUnidad');
+            Array.from(unidadSet).sort().forEach(u => {
+                const opt = document.createElement('option');
+                opt.value = u;
+                opt.textContent = u;
+                selectUnidad.appendChild(opt);
+            });
+        }
+
+        function renderContent(data) {
+            const tbody = document.getElementById('tableBody');
+            const cardsContainer = document.getElementById('cardsContainer');
+            const noResults = document.getElementById('noResults');
+
+            const siccobCount = data.filter(d => d['Proveedor'] === 'SICCOB').length;
+            const n10Count = data.filter(d => d['Proveedor'] === 'Nivel 10').length;
+
+            document.getElementById('kpiTotal').textContent = data.length;
+            document.getElementById('kpiSiccob').textContent = siccobCount;
+            document.getElementById('kpiN10').textContent = n10Count;
+
+            tbody.innerHTML = '';
+            cardsContainer.innerHTML = '';
+
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach((row, index) => {
+                const isN10 = row['Proveedor'] === 'Nivel 10';
+                const provBadge = isN10
+                    ? '<span class="inline-flex items-center px-2.5 py-0.5 text-xs font-bold rounded-md bg-rose-500/15 text-rose-300 border border-rose-500/30">Nivel 10</span>'
+                    : '<span class="inline-flex items-center px-2.5 py-0.5 text-xs font-bold rounded-md bg-sky-500/15 text-sky-300 border border-sky-500/30">SICCOB</span>';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-zinc-800/50 transition';
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-zinc-500 font-mono text-xs">${index + 1}</td>
+                    <td class="py-3 px-4 font-bold text-white">${row['Sucursal'] || '-'}</td>
+                    <td class="py-3 px-4 text-zinc-300">${row['Estado'] || '-'}</td>
+                    <td class="py-3 px-4 text-zinc-400">${row['Unidad de Negocio'] || '-'}</td>
+                    <td class="py-3 px-4">${provBadge}</td>
+                    <td class="py-3 px-4 text-zinc-300">${row['Tipo de Atencion'] || '-'}</td>
+                    <td class="py-3 px-4 text-zinc-300 font-medium">${row['Zona IT'] || '-'}</td>
+                    <td class="py-3 px-4 text-zinc-200 font-medium">${row['Supervisor IT Cinemex'] || '-'}</td>
+                `;
+                tbody.appendChild(tr);
+
+                const card = document.createElement('div');
+                card.className = 'bg-zinc-950 border border-zinc-800 rounded-xl p-4 hover:border-zinc-700 transition flex flex-col justify-between gap-3';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-1">
+                            <span class="text-[11px] font-mono text-zinc-500">#${index + 1} &bull; ${row['Unidad de Negocio']}</span>
+                            ${provBadge}
+                        </div>
+                        <h3 class="text-base font-bold text-white leading-snug">${row['Sucursal']}</h3>
+                        <p class="text-xs text-zinc-400 mt-0.5">${row['Estado']}</p>
+                    </div>
+                    <div class="pt-3 border-t border-zinc-800/80 grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                            <span class="block text-[10px] uppercase text-zinc-500">Zona / Atención</span>
+                            <span class="text-zinc-300 font-medium">${row['Zona IT']} &bull; ${row['Tipo de Atencion']}</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] uppercase text-zinc-500">Supervisor IT</span>
+                            <span class="text-zinc-200 font-semibold">${row['Supervisor IT Cinemex']}</span>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        function applyFilters() {
+            const complejoVal = document.getElementById('filterComplejo').value.toLowerCase().trim();
+            const supervisorVal = document.getElementById('filterSupervisor').value;
+            const zonaVal = document.getElementById('filterZona').value;
+            const unidadVal = document.getElementById('filterUnidad').value;
+
+            const filtered = dataConsolidada.filter(item => {
+                const matchComplejo = !complejoVal ||
+                    (item['Sucursal'] && item['Sucursal'].toLowerCase().includes(complejoVal)) ||
+                    (item['Estado'] && item['Estado'].toLowerCase().includes(complejoVal));
+
+                const matchProveedor = !currentProveedor || (item['Proveedor'] === currentProveedor);
+                const matchSupervisor = !supervisorVal || (item['Supervisor IT Cinemex'] === supervisorVal);
+                const matchZona = !zonaVal || (item['Zona IT'] === zonaVal);
+                const matchUnidad = !unidadVal || (item['Unidad de Negocio'] === unidadVal);
+
+                return matchComplejo && matchProveedor && matchSupervisor && matchZona && matchUnidad;
+            });
+
+            renderContent(filtered);
+        }
+    </script>
+</body>
+</html>
